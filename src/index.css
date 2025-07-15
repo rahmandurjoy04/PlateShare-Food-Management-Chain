@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* index.css or global.css */
+
+.active {
+  @apply text-white font-semibold border border-white;
+}
