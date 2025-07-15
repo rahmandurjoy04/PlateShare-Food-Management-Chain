@@ -88,7 +88,7 @@ const Navbar = () => {
 
       {/* Center (Links for lg+) */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-amber-100">{navLinks}</ul>
+        <ul className="menu menu-horizontal px-1 text-white">{navLinks}</ul>
       </div>
 
       {/* Right (CTA or Profile) */}
