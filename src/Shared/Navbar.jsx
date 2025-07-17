@@ -1,15 +1,31 @@
 import { Link, NavLink } from "react-router";
 import PlateShareLogo from "./PlateShareLogo/PlateShareLogo";
+import useAuth from "../hoooks/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  // const navLinks = (
-  //   <>
-  //     <li><NavLink to="/">Home</NavLink></li>
-  //     <li><NavLink to="/donations">All Donations</NavLink></li>
-  //     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-  //     <li><NavLink to="/login">Login</NavLink></li>
-  //   </>
-  // );
+  const { user, logoutUser } = useAuth();
+  
+
+  const signOut = () => {
+    Swal.fire({
+      title: 'Are you sure you want to logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logoutUser();
+        Swal.fire(
+          'Logged out!',
+          'You have been logged out successfully.',
+          'success'
+        );
+      }
+    });
+  };
 
   const navLinks = (
     <>
@@ -37,17 +53,8 @@ const Navbar = () => {
           Dashboard
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/login"
-          className={({ isActive }) => isActive ? 'active' : ''}
-        >
-          Login
-        </NavLink>
-      </li>
     </>
   );
-
 
   return (
     <div className="navbar shadow-sm px-4 py-0 bg-blue-900 min-w-sm">
@@ -77,12 +84,11 @@ const Navbar = () => {
           >
             {navLinks}
           </ul>
-
         </div>
 
         {/* Logo */}
-        <Link to="/" >
-          <PlateShareLogo></PlateShareLogo>
+        <Link to="/">
+          <PlateShareLogo />
         </Link>
       </div>
 
@@ -91,12 +97,29 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 text-white">{navLinks}</ul>
       </div>
 
-      {/* Right (CTA or Profile) */}
-      <div className="navbar-end">
-        {/* Example Button */}
-        <Link to="/login" className="btn btn-outline bg-[#1e3a8a] text-white">
-          Login
-        </Link>
+      {/* Right (User Info or Login Button) */}
+      <div className="navbar-end gap-2">
+        {user ? (
+          <>
+            <div className="text-white hidden md:flex items-center gap-2">
+              <span>{user.displayName || user.email}</span>
+              {user.photoURL && (
+                <img
+                  src={user.photoURL}
+                  alt="User"
+                  className="w-9 h-9 rounded-full border border-white"
+                />
+              )}
+            </div>
+            <button onClick={signOut} className="btn btn-outline text-white bg-[#1e3a8a]">
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link to="/login" className="btn btn-outline bg-[#1e3a8a] text-white">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

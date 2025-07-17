@@ -153,7 +153,7 @@ const stories = [
 
 const CommunityStories = () => {
     return (
-        <section className="bg-blue-50 py-14 px-4 md:px-10">
+        <section className="bg-blue-50 py-14 px-4 md:px-10 min-w-sm">
             <h2 className="text-3xl text-center md:text-4xl font-bold text-blue-900 mb-4">
                 Community Stories
             </h2>
@@ -172,7 +172,7 @@ const CommunityStories = () => {
                 {/* Image on the Left */}
                 <div className="w-full md:w-1/2 flex flex-col py-6 justify-center items-center">
                     <h1 className='text-4xl text-teal-600 text-center font-bold'>
-                        What Partners Say About PlateShare
+                        What Partners Say About <br /> PlateShare
                     </h1>
                     <p className='text-center text-teal-800 mt-6'>"Real stories from the people, charities, and restaurants who are making a difference through food rescue and community impact"</p>
                 </div>

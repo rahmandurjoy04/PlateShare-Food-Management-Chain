@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 @import "tailwindcss";
+@tailwind utilities;
 @plugin "daisyui";
 
 /* index.css or global.css */
@@ -8,10 +10,6 @@
 }
 
 
-/* index.css or App.css */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
-
-@tailwind utilities;
 
 /* Optional: Apply Lato as global default font */
 body {
