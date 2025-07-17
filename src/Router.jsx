@@ -7,6 +7,7 @@ import DashboardLayout from "./Layouts/DashBoardLayout";
 import AuthLayout from "./Layouts/AuthLayout";
 import Login from "./Pages/Authentication/Login";
 import Register from "./Pages/Authentication/Register";
+import PrivateRoute from "./Routes/PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -20,14 +21,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/donations',
-                element: <AllDonations></AllDonations>
+                element: <PrivateRoute>
+                    <AllDonations></AllDonations>
+                </PrivateRoute>
             }
         ]
     },
     //    Another Parent route for dashboard
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element:
+            <PrivateRoute>
+                <DashboardLayout></DashboardLayout>
+            </PrivateRoute>,
         children: [
             {
                 index: true,

@@ -2,10 +2,11 @@ import { Link, NavLink } from "react-router";
 import PlateShareLogo from "./PlateShareLogo/PlateShareLogo";
 import useAuth from "../hoooks/useAuth";
 import Swal from "sweetalert2";
+import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
 const Navbar = () => {
-  const { user, logoutUser } = useAuth();
-  
+  const { user, logoutUser, authLoading } = useAuth();
+
 
   const signOut = () => {
     Swal.fire({
@@ -27,6 +28,7 @@ const Navbar = () => {
     });
   };
 
+  console.log(user);
   const navLinks = (
     <>
       <li>
@@ -99,27 +101,32 @@ const Navbar = () => {
 
       {/* Right (User Info or Login Button) */}
       <div className="navbar-end gap-2">
-        {user ? (
-          <>
-            <div className="text-white hidden md:flex items-center gap-2">
-              <span>{user.displayName || user.email}</span>
-              {user.photoURL && (
-                <img
-                  src={user.photoURL}
-                  alt="User"
-                  className="w-9 h-9 rounded-full border border-white"
-                />
+        {
+          authLoading ?
+            (<LoadingSpinner></LoadingSpinner>) :
+            user ?
+              (
+                <>
+                  <div className="text-white hidden md:flex items-center gap-2">
+                    <span>{user.displayName || user.email}</span>
+                    {user.photoURL && (
+                      <img
+                        src={user?.photoURL}
+                        alt="User"
+                        className="w-9 h-9 rounded-full border border-white"
+                      />
+                    )}
+                  </div>
+                  <button onClick={signOut} className="btn btn-outline text-white bg-[#1e3a8a]">
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link to="/login" className="btn btn-outline bg-[#1e3a8a] text-white">
+                  Login
+                </Link>
               )}
-            </div>
-            <button onClick={signOut} className="btn btn-outline text-white bg-[#1e3a8a]">
-              Logout
-            </button>
-          </>
-        ) : (
-          <Link to="/login" className="btn btn-outline bg-[#1e3a8a] text-white">
-            Login
-          </Link>
-        )}
+              
       </div>
     </div>
   );

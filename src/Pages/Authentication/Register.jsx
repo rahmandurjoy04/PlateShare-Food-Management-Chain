@@ -2,13 +2,16 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { updateProfile } from 'firebase/auth';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import PlateShareLogo from '../../Shared/PlateShareLogo/PlateShareLogo';
 import SocialLogin from './SocialLogin';
 import useAuth from '../../hoooks/useAuth';
 
 const Register = () => {
     const { registerUser } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const {
         register,
@@ -55,7 +58,7 @@ const Register = () => {
                 photo: imageUrl,
                 role: 'user' // default role
             };
-
+            navigate(from, { replace: true });
             console.log(savedUser);
 
             // await fetch('https://your-server-url.com/users', {
