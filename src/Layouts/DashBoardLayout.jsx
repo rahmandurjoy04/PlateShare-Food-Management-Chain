@@ -8,12 +8,12 @@ const DashboardLayout = () => {
 
     // const { role, roleLoading } = useUserRole();
     const roleLoading = false
-    // const role = "admin"
-    const role = "charity"
+    const role = "admin"
+    // const role = "charity"
     // const role = "user"
 
     return (
-        <div className="drawer lg:drawer-open">
+        <div className="drawer lg:drawer-open min-w-sm">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
 
@@ -57,12 +57,12 @@ const DashboardLayout = () => {
                             Home
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink to="/dashboard/profile">
                             <FaUserShield className="inline-block mr-2" />
                             My Profile
                         </NavLink>
-                    </li>
+                    </li> */}
 
                     {/* User Links */}
                     {!roleLoading && role === 'user' && (
@@ -111,7 +111,14 @@ const DashboardLayout = () => {
                     {/* admin links */}
                     {!roleLoading && role === 'admin' && (
                         <>
-                            <li className="menu-title text-sm text-white/60 mt-4 mb-1">Admin Controls</li>
+                            <li className="menu-title text-sm text-white/60 mt-2 mb-1">Admin Controls</li>
+
+                            <li>
+                                <NavLink to="/dashboard/profile" className={({ isActive }) => isActive ? 'active' : ''}>
+                                    <FaUserEdit className="inline-block mr-2" />
+                                    My Profile
+                                </NavLink>
+                            </li>
 
                             <li>
                                 <NavLink to="/dashboard/manage-donations" className={({ isActive }) => isActive ? 'active' : ''}>
@@ -153,6 +160,12 @@ const DashboardLayout = () => {
                     {/* Charity Links */}
                     {!roleLoading && role === 'charity' && (
                         <>
+                            <li>
+                                <NavLink to="/dashboard/profile">
+                                    <FaUserShield className="inline-block mr-2" />
+                                    My Profile
+                                </NavLink>
+                            </li>
                             <li className="menu-title text-sm text-white/60 mt-4 mb-1">Charity Dashboard</li>
 
                             <li>

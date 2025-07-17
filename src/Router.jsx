@@ -8,6 +8,9 @@ import AuthLayout from "./Layouts/AuthLayout";
 import Login from "./Pages/Authentication/Login";
 import Register from "./Pages/Authentication/Register";
 import PrivateRoute from "./Routes/PrivateRoute";
+import MyProfile from "./Pages/DashBoard/MyProfile/MyProfile";
+import RequestCharityRole from "./Pages/DashBoard/UserDashBoard/RequestCharityRole/RequestCharityRole";
+import ManageUsers from "./Pages/DashBoard/AdminDashBoard/ManageUsers";
 
 
 export const router = createBrowserRouter([
@@ -38,6 +41,19 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <DashBoardHome></DashBoardHome>
+            },
+            {
+                path:'/dashboard/profile',
+                element:<MyProfile></MyProfile>
+            }
+            ,
+            {
+                path:'/dashboard/request-charity-role',
+                element:<RequestCharityRole></RequestCharityRole>
+            },
+            {
+                path:"/dashboard/manage-users",
+                element:<ManageUsers></ManageUsers>
             }
         ]
     },

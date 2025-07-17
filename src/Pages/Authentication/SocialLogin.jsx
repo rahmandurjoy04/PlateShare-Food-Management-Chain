@@ -1,13 +1,43 @@
 import React from 'react';
 import useAuth from '../../hoooks/useAuth';
 import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router';
+import axios from 'axios';
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
+    const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleGoogleSignin = async () => {
+  const from = location.state?.from?.pathname || "/";
+
+   const handleGoogleSignin = async () => {
     try {
-      await googleSignIn();
+      const result = await googleSignIn();
+      const user = result.user;
+
+      const name = user.displayName;
+      const email = user.email;
+      const photo = user.photoURL;
+      const firebaseUid = user.uid;
+      const created_at = new Date(user.metadata.creationTime).toISOString();
+      const last_login_at = new Date(user.metadata.lastSignInTime).toISOString();
+
+      const savedUser = {
+        name,
+        email,
+        photo,
+        role: 'user',
+        firebaseUid,
+        created_at,
+        last_login_at
+      };
+
+      console.log(savedUser);
+
+      // Save to backend
+      await axios.post('http://localhost:3000/users', savedUser);
+
       Swal.fire({
         title: 'Login Successful!',
         text: 'You have been logged in with Google.',
@@ -15,6 +45,9 @@ const SocialLogin = () => {
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'Continue',
       });
+
+      navigate(from, { replace: true });
+
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -26,6 +59,7 @@ const SocialLogin = () => {
       });
     }
   };
+
 
   return (
     <div>

@@ -6,12 +6,14 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import PlateShareLogo from '../../Shared/PlateShareLogo/PlateShareLogo';
 import SocialLogin from './SocialLogin';
 import useAuth from '../../hoooks/useAuth';
+import axios from 'axios';
 
 const Register = () => {
     const { registerUser } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    const imgbbAPIKey = import.meta.env.VITE_imgbbAPIKey;
 
     const {
         register,
@@ -22,14 +24,13 @@ const Register = () => {
     } = useForm();
 
     const password = watch('password');
-    const imgbbAPIKey = import.meta.env.VITE_imgbbAPIKey;
 
     const onSubmit = async (data) => {
         const { name, email, password, image } = data;
         const file = image[0];
 
         try {
-            // 1. Upload image to imgbb
+            // Upload to imgbb
             const formData = new FormData();
             formData.append('image', file);
 
@@ -43,33 +44,34 @@ const Register = () => {
 
             if (!imageUrl) throw new Error('Image upload failed');
 
-            // 2. Create Firebase user
+            // Create Firebase user
             const userCredential = await registerUser(email, password);
-            // 3. Update Firebase profile
+
+            // Update Firebase user profile
             await updateProfile(userCredential.user, {
                 displayName: name,
                 photoURL: imageUrl
             });
 
-            // 4. Save user to your database
+            // Convert Firebase timestamps to ISO string format
+            const created_at = new Date(userCredential.user.metadata.creationTime).toISOString();
+            const last_login_at = new Date(userCredential.user.metadata.lastSignInTime).toISOString();
+            const firebaseUid = userCredential.user.uid;
+            // Prepare user data to store in your backend
             const savedUser = {
                 name,
                 email,
                 photo: imageUrl,
-                role: 'user' // default role
+                role: 'user',
+                firebaseUid,
+                created_at,
+                last_login_at
             };
-            navigate(from, { replace: true });
-            console.log(savedUser);
 
-            // await fetch('https://your-server-url.com/users', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(savedUser)
-            // });
+            // Save user via Axios
+            await axios.post('http://localhost:3000/users', savedUser); // replace with your actual backend URL
 
-            // 5. Show success message
+            // Show success alert
             Swal.fire({
                 icon: 'success',
                 title: 'Registration Successful!',
@@ -77,6 +79,8 @@ const Register = () => {
             });
 
             reset();
+            navigate(from, { replace: true });
+
         } catch (error) {
             Swal.fire({
                 icon: 'error',
@@ -102,11 +106,9 @@ const Register = () => {
                     className="input input-bordered w-full"
                     {...register('name', { required: 'Name is required' })}
                 />
-                {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-                )}
+                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
 
-                {/* Photo Upload */}
+                {/* Profile Photo */}
                 <label className="label mt-4">Upload Profile Photo</label>
                 <input
                     type="file"
@@ -124,9 +126,7 @@ const Register = () => {
                     className="input input-bordered w-full"
                     {...register('email', { required: 'Email is required' })}
                 />
-                {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-                )}
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
 
                 {/* Password */}
                 <label className="label mt-4">Password</label>
@@ -142,13 +142,11 @@ const Register = () => {
                         },
                         pattern: {
                             value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
-                            message: 'Must contain at least one capital letter and one special character'
+                            message: 'Must include one capital letter and one special character'
                         }
                     })}
                 />
-                {errors.password && (
-                    <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-                )}
+                {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
 
                 {/* Confirm Password */}
                 <label className="label mt-4">Confirm Password</label>
@@ -158,20 +156,17 @@ const Register = () => {
                     className="input input-bordered w-full"
                     {...register('confirmPassword', {
                         required: 'Please confirm your password',
-                        validate: (value) =>
-                            value === password || 'Passwords do not match'
+                        validate: (value) => value === password || 'Passwords do not match'
                     })}
                 />
-                {errors.confirmPassword && (
-                    <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
-                )}
+                {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
 
-                {/* Submit Button */}
+                {/* Submit */}
                 <button type="submit" className="btn btn-neutral mt-6 w-full">
                     Register
                 </button>
 
-                {/* Login Link */}
+                {/* Already have account */}
                 <p className="text-lg text-center text-gray-600 mt-4">
                     Already have an account?{' '}
                     <Link to="/login" className="text-blue-600 font-medium hover:underline">
