@@ -11,6 +11,7 @@ import PrivateRoute from "./Routes/PrivateRoute";
 import MyProfile from "./Pages/DashBoard/MyProfile/MyProfile";
 import RequestCharityRole from "./Pages/DashBoard/UserDashBoard/RequestCharityRole/RequestCharityRole";
 import ManageUsers from "./Pages/DashBoard/AdminDashBoard/ManageUsers";
+import CharityRolePayment from "./Pages/DashBoard/UserDashBoard/CharityRolePayment/CharityRolePayment";
 
 
 export const router = createBrowserRouter([
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/request-charity-role',
                 element:<RequestCharityRole></RequestCharityRole>
+            },
+            {
+                path:'/dashboard/payment/charity',
+                element:<CharityRolePayment></CharityRolePayment>
             },
             {
                 path:"/dashboard/manage-users",

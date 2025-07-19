@@ -100,10 +100,11 @@ const Navbar = () => {
       </div>
 
       {/* Right (User Info or Login Button) */}
-      <div className="navbar-end gap-2">
+      <div className="navbar-end  gap-2">
         {
           authLoading ?
-            (<LoadingSpinner></LoadingSpinner>) :
+            (<span className="loading loading-dots text-white loading-xl"></span>)
+             :
             user ?
               (
                 <>
@@ -126,7 +127,7 @@ const Navbar = () => {
                   Login
                 </Link>
               )}
-              
+
       </div>
     </div>
   );

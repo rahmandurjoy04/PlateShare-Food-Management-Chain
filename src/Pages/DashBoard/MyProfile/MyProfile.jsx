@@ -41,7 +41,7 @@ const MyProfile = () => {
       <div className="bg-white border border-gray-200 rounded-xl shadow-md p-6 flex flex-col items-center space-y-4">
         <div className="avatar">
           <div className="w-28 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-            <img src={photo} alt="Profile" />
+            <img src={photo} alt="Profile" referrerPolicy="no-referrer"/>
           </div>
         </div>
 

@@ -1,21 +1,20 @@
 import React from 'react';
-import useAuth from '../../hoooks/useAuth';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router';
 import axios from 'axios';
+import useAuth from '../../hoooks/useAuth';
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
 
-   const handleGoogleSignin = async () => {
+  const handleGoogleSignin = async () => {
     try {
       const result = await googleSignIn();
       const user = result.user;
-
       const name = user.displayName;
       const email = user.email;
       const photo = user.photoURL;
@@ -30,13 +29,31 @@ const SocialLogin = () => {
         role: 'user',
         firebaseUid,
         created_at,
-        last_login_at
+        last_login_at,
       };
 
-      console.log(savedUser);
+      let isNewUser = false;
+      let userRole = 'user';
 
-      // Save to backend
-      await axios.post('http://localhost:3000/users', savedUser);
+      try {
+        const res = await axios.get(`http://localhost:3000/users?email=${email}`);
+        userRole = res.data.role;
+
+        await axios.patch(`http://localhost:3000/users?email=${email}`, {
+          last_login_at,
+          role: userRole,
+        });
+      } catch (err) {
+        if (err.response?.status === 404) {
+          isNewUser = true;
+        } else {
+          throw err;
+        }
+      }
+
+      if (isNewUser) {
+        await axios.post('http://localhost:3000/users', savedUser);
+      }
 
       Swal.fire({
         title: 'Login Successful!',
@@ -59,6 +76,7 @@ const SocialLogin = () => {
       });
     }
   };
+
 
 
   return (
