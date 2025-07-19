@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
-import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaUserCheck, FaUserShield, FaTasks, FaStar, FaUsersCog, FaClipboardCheck, FaClipboardList, FaTruck } from 'react-icons/fa';
+import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaUserCheck, FaUserShield, FaTasks, FaStar, FaUsersCog, FaClipboardCheck, FaClipboardList, FaTruck, FaUserCog, FaChartBar, FaListAlt, FaUtensils } from 'react-icons/fa';
 // import useUserRole from '../hooks/useUserRole';
 import PlateShareLogo from '../Shared/PlateShareLogo/PlateShareLogo';
 
@@ -8,8 +8,8 @@ const DashboardLayout = () => {
 
     // const { role, roleLoading } = useUserRole();
     const roleLoading = false
-    const role = "admin"
-    // const role = "charity"
+    // const role = "admin"
+    const role = "charity"
     // const role = "user"
 
     return (
@@ -57,12 +57,7 @@ const DashboardLayout = () => {
                             Home
                         </Link>
                     </li>
-                    {/* <li>
-                        <NavLink to="/dashboard/profile">
-                            <FaUserShield className="inline-block mr-2" />
-                            My Profile
-                        </NavLink>
-                    </li> */}
+                    
 
                     {/* User Links */}
                     {!roleLoading && role === 'user' && (
@@ -157,16 +152,50 @@ const DashboardLayout = () => {
                         </>
                     )}
 
+                    {/* Resturant Links */}
+                    {!roleLoading && role === 'charity' && (
+                        <>
+                            <li className="menu-title text-sm text-white/60 mt-2 mb-1">Resturant Controls</li>
+
+                            <li>
+                                <NavLink
+                                    to="/dashboard/restaurant/add-donation"
+                                    className={({ isActive }) => isActive ? 'active' : ''}
+                                >
+                                    <FaUtensils className="mr-2" /> Add Donation
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink
+                                    to="/dashboard/restaurant/my-donations"
+                                    className={({ isActive }) => isActive ? 'active' : ''}
+                                >
+                                    <FaListAlt className="mr-2" /> My Donations
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/restaurant/requested-donations"
+                                    className={({ isActive }) => isActive ? 'active' : ''}
+                                >
+                                    <FaListAlt className="mr-2" /> Requested Donations
+                                </NavLink>
+                            </li>
+
+                        </>
+                    )}
                     {/* Charity Links */}
                     {!roleLoading && role === 'charity' && (
                         <>
+                            <li className="menu-title text-sm text-white/60 mt-2 mb-1">Charity Dashboard</li>
+
                             <li>
                                 <NavLink to="/dashboard/profile">
                                     <FaUserShield className="inline-block mr-2" />
                                     My Profile
                                 </NavLink>
                             </li>
-                            <li className="menu-title text-sm text-white/60 mt-4 mb-1">Charity Dashboard</li>
 
                             <li>
                                 <NavLink to="/dashboard/my-requests" className={({ isActive }) => isActive ? 'active' : ''}>

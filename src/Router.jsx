@@ -12,6 +12,8 @@ import MyProfile from "./Pages/DashBoard/MyProfile/MyProfile";
 import RequestCharityRole from "./Pages/DashBoard/UserDashBoard/RequestCharityRole/RequestCharityRole";
 import ManageUsers from "./Pages/DashBoard/AdminDashBoard/ManageUsers";
 import CharityRolePayment from "./Pages/DashBoard/UserDashBoard/CharityRolePayment/CharityRolePayment";
+import ManageRoleRequests from "./Pages/DashBoard/AdminDashBoard/ManageRoleRequests/ManageRoleRequests";
+import AddDonationForm from "./Pages/DashBoard/ResturantDashboard/AddDonationForm";
 
 
 export const router = createBrowserRouter([
@@ -59,6 +61,16 @@ export const router = createBrowserRouter([
             {
                 path:"/dashboard/manage-users",
                 element:<ManageUsers></ManageUsers>
+            }
+            ,
+            {
+                path:"/dashboard/manage-role-requests",
+                element:<ManageRoleRequests></ManageRoleRequests>
+            }
+            ,
+            {
+                path:"/dashboard/restaurant/add-donation",
+                element:<AddDonationForm></AddDonationForm>
             }
         ]
     },

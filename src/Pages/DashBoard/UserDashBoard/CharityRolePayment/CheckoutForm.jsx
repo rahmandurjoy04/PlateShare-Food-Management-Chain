@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../../hoooks/useAxiosSecure';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../../Shared/LoadingSpinner/LoadingSpinner';
 
@@ -11,6 +11,7 @@ const CheckoutForm = () => {
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const requestData = location.state;
     const { name, requested_by, organization, amount, reason } = requestData || {};
@@ -94,6 +95,7 @@ const CheckoutForm = () => {
 
             // Save role Request
             const roleRequestData = {
+                name:name,
                 email: data.email,
                 amount:amount,
                 organization: organization,
@@ -105,9 +107,11 @@ const CheckoutForm = () => {
                 created_at: new Date().toISOString(),
             };
             await axiosSecure.post('roleRequest', roleRequestData);
-        }
+        };
 
         setProcessing(false);
+
+        navigate('/dashboard/request-charity-role')
     };
 
 
