@@ -52,7 +52,7 @@ const MyDonations = () => {
 
   return (
     <div className=" min-w-sm px-4 py-8">
-      <h2 className="text-3xl font-bold text-blue-900 text-center mb-6">My Donations</h2>
+      <h2 className="text-4xl font-bold text-blue-900 text-center mb-6">My Donations</h2>
       {donations.length === 0 ? (
         <p className="text-gray-600 text-4xl yext-center">No donations found.</p>
       ) : (

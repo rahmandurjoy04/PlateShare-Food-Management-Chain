@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaUserCheck, FaUserShield, FaTasks, FaStar, FaUsersCog, FaClipboardCheck, FaClipboardList, FaTruck, FaUserCog, FaChartBar, FaListAlt, FaUtensils } from 'react-icons/fa';
-// import useUserRole from '../hooks/useUserRole';
 import PlateShareLogo from '../Shared/PlateShareLogo/PlateShareLogo';
+import useGetUserRole from '../hoooks/useGetUserRole';
 
 const DashboardLayout = () => {
 
-    // const { role, roleLoading } = useUserRole();
-    const roleLoading = false
-    const role = "admin"
+    const { role, roleLoading } = useGetUserRole();
+    // const roleLoading = false
+    // const role = "admin"
     // const role = "charity"
     // const role = "user"
 
@@ -153,7 +153,7 @@ const DashboardLayout = () => {
                     )}
 
                     {/* Resturant Links */}
-                    {!roleLoading && role === 'charity' && (
+                    {!roleLoading && role === 'resturant' && (
                         <>
                             <li className="menu-title text-sm text-white/60 mt-2 mb-1">Resturant Controls</li>
 
@@ -198,28 +198,28 @@ const DashboardLayout = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/dashboard/my-requests" className={({ isActive }) => isActive ? 'active' : ''}>
+                                <NavLink to="/dashboard/charity/my-requests" className={({ isActive }) => isActive ? 'active' : ''}>
                                     <FaClipboardList className="inline-block mr-2" />
                                     My Requests
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/dashboard/my-pickups" className={({ isActive }) => isActive ? 'active' : ''}>
+                                <NavLink to="/dashboard/charity/my-pickups" className={({ isActive }) => isActive ? 'active' : ''}>
                                     <FaTruck className="inline-block mr-2" />
                                     My Pickups
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/dashboard/received-donations" className={({ isActive }) => isActive ? 'active' : ''}>
+                                <NavLink to="/dashboard/charity/received-donations" className={({ isActive }) => isActive ? 'active' : ''}>
                                     <FaBoxOpen className="inline-block mr-2" />
                                     Received Donations
                                 </NavLink>
                             </li>
 
                             <li>
-                                <NavLink to="/dashboard/charity-transactions" className={({ isActive }) => isActive ? 'active' : ''}>
+                                <NavLink to="/dashboard/charity/charity-transactions" className={({ isActive }) => isActive ? 'active' : ''}>
                                     <FaMoneyCheckAlt className="inline-block mr-2" />
                                     Transaction History
                                 </NavLink>

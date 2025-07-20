@@ -2,11 +2,9 @@ import { Link, NavLink } from "react-router";
 import PlateShareLogo from "./PlateShareLogo/PlateShareLogo";
 import useAuth from "../hoooks/useAuth";
 import Swal from "sweetalert2";
-import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
 const Navbar = () => {
   const { user, logoutUser, authLoading } = useAuth();
-
 
   const signOut = () => {
     Swal.fire({
@@ -29,6 +27,7 @@ const Navbar = () => {
   };
 
   console.log(user);
+
   const navLinks = (
     <>
       <li>

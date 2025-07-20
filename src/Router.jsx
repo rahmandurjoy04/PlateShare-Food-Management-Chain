@@ -20,6 +20,8 @@ import ManageDonations from "./Pages/DashBoard/AdminDashBoard/ManageDonations";
 import DonationDetails from "./Pages/AllDonations/DonationDetails";
 import ManageRequests from "./Pages/DashBoard/AdminDashBoard/ManageRequests";
 import FeatureDonations from "./Pages/DashBoard/AdminDashBoard/FeatureDonations";
+import RequestedDonations from "./Pages/DashBoard/ResturantDashboard/RequestedDonations";
+import MyRequests from "./Pages/DashBoard/CharityDashboard/MyRequests";
 
 
 export const router = createBrowserRouter([
@@ -109,6 +111,16 @@ export const router = createBrowserRouter([
             {
                 path:"/dashboard/feature-donations",
                 element:<FeatureDonations></FeatureDonations>
+            }
+            ,
+            {
+                path:"/dashboard/restaurant/requested-donations",
+                element:<RequestedDonations></RequestedDonations>
+            }
+            ,
+            {
+                path:"/dashboard/charity/my-requests",
+                element:<MyRequests></MyRequests>
             }
         ]
     },
