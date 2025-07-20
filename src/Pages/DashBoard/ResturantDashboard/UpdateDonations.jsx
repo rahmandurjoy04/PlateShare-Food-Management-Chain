@@ -78,7 +78,7 @@ const UpdateDonation = () => {
         }
     };
 
-    if (loading) return <div className="text-center mt-10">Loading donation data...</div>;
+    if (loading) return <div className="text-center text-3xl mt-10">Loading donation data...</div>;
 
     return (
         <div className="min-w-sm max-w-2xl mx-auto mt-10 bg-blue-200 p-10 shadow-md rounded-lg">

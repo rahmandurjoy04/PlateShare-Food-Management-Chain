@@ -8,8 +8,8 @@ const DashboardLayout = () => {
 
     // const { role, roleLoading } = useUserRole();
     const roleLoading = false
-    // const role = "admin"
-    const role = "charity"
+    const role = "admin"
+    // const role = "charity"
     // const role = "user"
 
     return (
