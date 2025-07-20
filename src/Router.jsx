@@ -15,6 +15,7 @@ import CharityRolePayment from "./Pages/DashBoard/UserDashBoard/CharityRolePayme
 import ManageRoleRequests from "./Pages/DashBoard/AdminDashBoard/ManageRoleRequests/ManageRoleRequests";
 import AddDonationForm from "./Pages/DashBoard/ResturantDashboard/AddDonationForm";
 import MyDonations from "./Pages/DashBoard/ResturantDashboard/MyDonations";
+import UpdateDonation from "./Pages/DashBoard/ResturantDashboard/UpdateDonations";
 
 
 export const router = createBrowserRouter([
@@ -77,6 +78,11 @@ export const router = createBrowserRouter([
             {
                 path:"/dashboard/restaurant/my-donations",
                 element:<MyDonations></MyDonations>
+            }
+            ,
+            {
+                path:"/dashboard/restaurant/update-donation/:id",
+                element:<UpdateDonation></UpdateDonation>
             }
         ]
     },

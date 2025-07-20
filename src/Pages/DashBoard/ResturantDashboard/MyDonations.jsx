@@ -83,7 +83,7 @@ const MyDonations = () => {
                 <div className="flex gap-3 pt-2">
                   {donation.status !== 'rejected' && (
                     <button
-                      onClick={() => navigate(`/dashboard/update-donation/${donation._id}`, { state: donation })}
+                      onClick={() => navigate(`/dashboard/restaurant/update-donation/${donation._id}`, { state: donation })}
                       className="bg-blue-900 text-white px-4 py-1 rounded hover:bg-blue-800"
                     >
                       Update
