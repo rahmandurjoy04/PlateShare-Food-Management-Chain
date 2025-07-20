@@ -74,7 +74,8 @@ const DonationDetails = () => {
                 requestDescription,
                 pickupTime,
                 foodType: donation.foodType,
-                quantity: donation.quantity
+                quantity: donation.quantity,
+                location:donation.location
             });
         },
         onSuccess: () => {
