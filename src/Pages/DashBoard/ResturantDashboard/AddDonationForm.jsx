@@ -43,7 +43,7 @@ const AddDonationForm = () => {
 
         const res = await axiosSecure.post('donations', donationData);
         if (res.data.insertedId) {
-            Swal.fire('Success', 'Donation added successfully!', 'success');
+            Swal.fire('Thank You', 'Your Donation added successfully!', 'success');
             reset();
         }
     } catch (error) {

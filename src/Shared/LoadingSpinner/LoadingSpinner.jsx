@@ -2,7 +2,7 @@ import React from 'react';
 
 const LoadingSpinner = () => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center my-30">
       <div className="relative w-20 h-20">
         {/* Outer gradient ring */}
         <div className="absolute inset-0 rounded-full border-t-4 border-b-4 border-transparent border-t-blue-500 border-b-purple-500 animate-spin"></div>
