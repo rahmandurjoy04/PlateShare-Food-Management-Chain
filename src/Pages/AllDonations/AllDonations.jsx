@@ -55,7 +55,7 @@ const AllDonations = () => {
                                     <span
                                         className={`inline-block text-xs px-4 py-1 rounded-full font-semibold uppercase tracking-wide bg-green-100 text-green-800 border border-green-300`}
                                     >
-                                        {donation.status}
+                                        {donation.delivery_status}
                                     </span>
                                 </p>
                             </div>

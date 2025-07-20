@@ -17,6 +17,8 @@ import AddDonationForm from "./Pages/DashBoard/ResturantDashboard/AddDonationFor
 import MyDonations from "./Pages/DashBoard/ResturantDashboard/MyDonations";
 import UpdateDonation from "./Pages/DashBoard/ResturantDashboard/UpdateDonations";
 import ManageDonations from "./Pages/DashBoard/AdminDashBoard/ManageDonations";
+import DonationDetails from "./Pages/AllDonations/DonationDetails";
+import ManageRequests from "./Pages/DashBoard/AdminDashBoard/ManageRequests";
 
 
 export const router = createBrowserRouter([
@@ -32,6 +34,13 @@ export const router = createBrowserRouter([
                 path: '/donations',
                 element: <PrivateRoute>
                     <AllDonations></AllDonations>
+                </PrivateRoute>
+            }
+            ,
+            {
+                path: '/donation/:id',
+                element: <PrivateRoute>
+                    <DonationDetails></DonationDetails>
                 </PrivateRoute>
             }
         ]
@@ -89,6 +98,11 @@ export const router = createBrowserRouter([
             {
                 path:"/dashboard/manage-donations",
                 element:<ManageDonations></ManageDonations>
+            }
+            ,
+            {
+                path:"/dashboard/manage-requests",
+                element:<ManageRequests></ManageRequests>
             }
         ]
     },
