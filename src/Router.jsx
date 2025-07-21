@@ -25,6 +25,7 @@ import MyRequests from "./Pages/DashBoard/CharityDashboard/MyRequests";
 import MyPickups from "./Pages/DashBoard/CharityDashboard/MyPickups";
 import ReceivedDonations from "./Pages/DashBoard/CharityDashboard/ReceivedDonations";
 import TransactionHistory from "./Pages/DashBoard/CharityDashboard/TransactionHistory";
+import MyReviews from "./Pages/DashBoard/UserDashBoard/MyReviews";
 
 
 export const router = createBrowserRouter([
@@ -139,6 +140,11 @@ export const router = createBrowserRouter([
             {
                 path:"/dashboard/user-transactions",
                 element:<TransactionHistory></TransactionHistory>
+            }
+            ,
+            {
+                path:"/dashboard/my-reviews",
+                element:<MyReviews></MyReviews>
             }
         ]
     },

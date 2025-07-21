@@ -1,29 +1,27 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import useAxiosSecure from '../../hoooks/useAxiosSecure';
-import useAuth from '../../hoooks/useAuth';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
+import useAuth from '../../../hoooks/useAuth';
+import useAxiosSecure from '../../../hoooks/useAxiosSecure';
 
 const MyReviews = () => {
   const { user } = useAuth();
-  const [axiosSecure] = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // Fetch user-specific reviews
   const { data: reviews = [], isLoading } = useQuery({
     queryKey: ['user-reviews', user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/reviews?email=${user?.email}`);
+      const res = await axiosSecure.get(`my-reviews?email=${user?.email}`);
       return res.data.reviews;
     },
     enabled: !!user?.email,
   });
 
-  // Delete mutation
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      return await axiosSecure.delete(`/reviews/${id}`);
+      return await axiosSecure.delete(`reviews/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['user-reviews', user?.email]);
@@ -53,25 +51,44 @@ const MyReviews = () => {
   if (isLoading) return <p className="text-center text-lg">Loading your reviews...</p>;
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-6">My Reviews</h2>
+    <div className="p-4 max-w-7xl mx-auto">
+      <h2 className="text-4xl font-bold text-blue-800 mb-8 text-center">My Reviews</h2>
+
       {reviews.length === 0 ? (
         <p className="text-center text-gray-500">You haven't submitted any reviews yet.</p>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2">
-          {reviews.map(review => (
-            <div key={review._id} className="bg-white rounded-xl p-4 shadow-md border border-gray-100">
-              <h3 className="text-lg font-semibold text-blue-800">{review.donationTitle}</h3>
-              <p className="text-sm text-gray-600 mb-1">From: {review.restaurantName}</p>
-              <p className="text-sm text-gray-500 mb-2">Reviewed on: {format(new Date(review.createdAt), 'PPP')}</p>
-              <p className="text-gray-700 mb-4">{review.description}</p>
-              <button
-                onClick={() => handleDelete(review._id)}
-                className="btn btn-sm bg-red-500 text-white hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </div>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((review) => (
+            <div
+  key={review._id}
+  className="bg-white rounded-2xl p-5 border border-gray-200 shadow-md space-y-4 transition hover:shadow-lg"
+>
+  <div className="bg-blue-50 p-3 rounded-md">
+    <h3 className="text-lg font-bold text-blue-800">🍽️ Donation: <span className="text-gray-800 text-md">{review.donationTitle || 'Untitled Donation'}</span>
+</h3>
+
+    <h4 className="text-lg font-bold text-green-800">🏪 Restaurant Name: <span className="text-gray-800">{review.resturant_name || 'Unknown Restaurant'}</span>
+</h4>
+
+    <h4 className="text-lg font-bold text-yellow-800">📅 Review Date: <span className="text-gray-800">{format(new Date(review.createdAt), 'PPP')}</span>
+</h4>
+  </div>
+
+  <div className="bg-gray-200 p-3 rounded-md">
+    <h4 className="text-lg font-semibold text-gray-800">💬 Review</h4>
+    <p className="text-gray-700 bg-gray-100 p-2 my-2 rounded">{review.description}</p>
+  </div>
+
+  <div className="text-right">
+    <button
+      onClick={() => handleDelete(review._id)}
+      className="btn btn-sm w-full bg-red-500 text-white hover:bg-red-600"
+    >
+      Delete
+    </button>
+  </div>
+</div>
+
           ))}
         </div>
       )}

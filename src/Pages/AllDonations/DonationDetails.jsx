@@ -99,12 +99,14 @@ const DonationDetails = () => {
     // Add Review mutation
     const addReviewMutation = useMutation({
         mutationFn: async () => {
-            return axiosSecure.post('/reviews', { 
+            return axiosSecure.post('reviews', { 
                 post_id: id,
                 reviewerName: user.displayName || user.name,
                 reviewerEmail: user.email,
                 description: reviewDescription,
                 rating: reviewRating,
+                resturant_name:donation.restaurantName,
+                donationTitle:donation.title,
             });
         },
 
