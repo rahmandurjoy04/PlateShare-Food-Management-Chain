@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../../hoooks/useAuth';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const formatDateTime = (isoString) => {
   if (!isoString) return 'N/A';
@@ -31,7 +32,7 @@ const MyProfile = () => {
 
   console.log(userInfo);
 
-  if (isLoading) return <div className="text-center text-blue-700 py-10">Loading profile...</div>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   if (error) return <div className="text-center text-red-600 py-10">Failed to load profile.</div>;
 
   const { name, email, photo, role, created_at, last_login_at } = userInfo;

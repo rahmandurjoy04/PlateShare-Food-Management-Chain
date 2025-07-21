@@ -83,7 +83,8 @@ const DonationDetails = () => {
                 pickupTime,
                 foodType: donation.foodType,
                 quantity: donation.quantity,
-                location: donation.location
+                location: donation.location,
+                image:user.photoURL
             });
         },
         onSuccess: () => {
@@ -178,13 +179,16 @@ const DonationDetails = () => {
             {/* Action buttons */}
             <div className="flex flex-col space-y-4 ">
                 {/* Save to Favorites */}
-                <button
+                
+                {(role === 'charity'|| role==='user') && (
+                    <button
                     onClick={() => saveFavoriteMutation.mutate()}
                     disabled={saveFavoriteMutation.isLoading}
                     className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 rounded-md transition"
                 >
                     {saveFavoriteMutation.isLoading ? 'Saving...' : 'Save to Favorites'}
                 </button>
+                )}
 
                 {/* Request Donation (Charity only) */}
                 {role === 'charity' && donation.delivery_status === 'Available' && (

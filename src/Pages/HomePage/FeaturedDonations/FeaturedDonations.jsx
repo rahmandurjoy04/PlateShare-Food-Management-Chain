@@ -37,7 +37,7 @@ const FeaturedDonations = () => {
   const visibleDonations = donations.slice(startIndex, startIndex + cardsPerPage);
 
   return (
-    <div className="py-8 bg-blue-50 rounded-lg shadow-lg mx-auto">
+    <div className="py-8 bg-blue-100 rounded-lg shadow-lg mx-auto">
       <h2 className="text-4xl font-extrabold mb-6 text-center text-blue-900">Featured Donations</h2>
 
       <div className="flex items-center gap-4">

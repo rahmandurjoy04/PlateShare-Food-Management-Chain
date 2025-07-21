@@ -125,7 +125,7 @@ const ManageUsers = () => {
                 <p className="text-gray-600 text-center">No users found.</p>
             ) : (
                 <div className="overflow-x-auto border border-gray-300 rounded-lg shadow-md">
-  <table className="table table-zebra table-compact w-full border-collapse border border-gray-300">
+  <table className="table table-zebra table-compact min-w-sm w-full border-collapse border border-gray-300">
     {/* Table Head */}
     <thead className="bg-blue-300 text-black">
       <tr>

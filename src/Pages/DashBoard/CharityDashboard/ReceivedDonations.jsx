@@ -72,7 +72,7 @@ const ReceivedDonations = () => {
   if (loading) return <p className="text-center mt-8 text-lg">Loading received donations...</p>;
   if (error) return <p className="text-center mt-8 text-red-500">{error}</p>;
   if (receivedDonations.length === 0)
-    return <p className="text-center mt-8 text-gray-500">No received donations found.</p>;
+    return <p className="text-center text-4xl mt-8 text-gray-500">No received donations found.</p>;
 
   return (
     <div className="max-w-7xl mx-auto p-4">

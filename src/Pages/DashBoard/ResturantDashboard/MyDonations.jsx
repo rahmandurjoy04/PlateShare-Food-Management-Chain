@@ -54,7 +54,19 @@ const MyDonations = () => {
     <div className=" min-w-sm px-4 py-8">
       <h2 className="text-4xl font-bold text-blue-900 text-center mb-6">My Donations</h2>
       {donations.length === 0 ? (
-        <p className="text-gray-600 text-4xl yext-center">No donations found.</p>
+        <div className="flex flex-col items-center justify-center text-center py-16 px-6 bg-blue-100 shadow-md rounded-xl border border-gray-200">
+          
+          <h2 className="text-2xl font-semibold text-gray-700 mb-2">No Donations Found</h2>
+          <p className="text-gray-500 mb-4 max-w-md">
+            Looks like there are no donations available right now. Please check back later or explore other sections.
+          </p>
+          <button
+            className="mt-2 px-6 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition"
+            onClick={() => navigate('/dashboard/restaurant/add-donation')} // change route if needed
+          >
+            Add Donation
+          </button>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {donations.map((donation) => (
@@ -68,13 +80,12 @@ const MyDonations = () => {
                 <p>
                   <span className="font-medium"><span className='font-semibold'>Status</span>:</span>{' '}
                   <span
-                    className={`font-bold capitalize ${
-                      donation.status === 'pending'
+                    className={`font-bold capitalize ${donation.status === 'pending'
                         ? 'text-yellow-600'
                         : donation.status === 'verified'
-                        ? 'text-green-600'
-                        : 'text-red-500'
-                    }`}
+                          ? 'text-green-600'
+                          : 'text-red-500'
+                      }`}
                   >
                     {donation.status}
                   </span>

@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router';
 import useAxiosSecure from '../../hoooks/useAxiosSecure';
+import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 const AllDonations = () => {
     const axiosSecure = useAxiosSecure();
@@ -14,11 +15,11 @@ const AllDonations = () => {
         },
     });
 
-    if (isLoading) return <div className="text-center mt-10 text-xl text-blue-700">Loading donations...</div>;
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
     return (
-        <div className="max-w-7xl mx-auto p-6">
-            <h2 className="text-4xl font-extrabold text-center mb-2 text-blue-800 drop-shadow-sm">🍱 All Donations</h2>
+        <div className="min-w-sm max-w-7xl mx-auto p-6">
+            <h2 className="text-4xl font-extrabold text-center mb-6 text-blue-800 drop-shadow-sm">🍱 All Donations</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {donations.map((donation) => (

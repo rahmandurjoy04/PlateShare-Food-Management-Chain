@@ -7,10 +7,7 @@ import useGetUserRole from '../hoooks/useGetUserRole';
 const DashboardLayout = () => {
 
     const { role, roleLoading } = useGetUserRole();
-    // const roleLoading = false
-    // const role = "admin"
-    // const role = "charity"
-    // const role = "user"
+
 
     return (
         <div className="drawer lg:drawer-open min-w-sm">
@@ -18,7 +15,7 @@ const DashboardLayout = () => {
             <div className="drawer-content flex flex-col">
 
                 {/* Navbar */}
-                <div className="navbar bg-blue-900 w-full lg:hidden">
+                <div className="navbar bg-blue-900 w-full min-w-sm lg:hidden">
                     <div className="flex-none ">
                         <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
                             <svg
@@ -36,7 +33,7 @@ const DashboardLayout = () => {
                             </svg>
                         </label>
                     </div>
-                    <div className="mx-2 flex-1 px-2 lg:hidden text-white text-xl">Dashboard</div>
+                    <div className="mx-2 min-w-sm flex-1 px-2 lg:hidden text-white text-xl">Dashboard</div>
 
                 </div>
                 {/* Page content here */}
@@ -57,7 +54,15 @@ const DashboardLayout = () => {
                             Home
                         </Link>
                     </li>
-                    
+
+                    {
+                        roleLoading && <>
+                            <div className=' my-5 flex justify-center items-center'>
+                                <span className="loading loading-bars loading-xl"></span>
+
+                            </div>
+                        </>
+                    }
 
                     {/* User Links */}
                     {!roleLoading && role === 'user' && (
@@ -153,10 +158,23 @@ const DashboardLayout = () => {
                     )}
 
                     {/* Resturant Links */}
-                    {!roleLoading && role === 'resturant' && (
+                    {!roleLoading && role === 'restaurant' && (
                         <>
                             <li className="menu-title text-sm text-white/60 mt-2 mb-1">Resturant Controls</li>
-
+                            <li>
+                                <NavLink to="/dashboard/profile" className={({ isActive }) => isActive ? 'active' : ''}>
+                                    <FaUserEdit className="inline-block mr-2" />
+                                    My Profile
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/restaurant/donation-stats"
+                                    className={({ isActive }) => isActive ? 'active' : ''}
+                                >
+                                    <FaChartBar className="mr-2" /> Donation Stats
+                                </NavLink>
+                            </li>
                             <li>
                                 <NavLink
                                     to="/dashboard/restaurant/add-donation"
