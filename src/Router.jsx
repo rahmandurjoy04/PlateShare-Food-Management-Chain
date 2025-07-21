@@ -24,6 +24,7 @@ import RequestedDonations from "./Pages/DashBoard/ResturantDashboard/RequestedDo
 import MyRequests from "./Pages/DashBoard/CharityDashboard/MyRequests";
 import MyPickups from "./Pages/DashBoard/CharityDashboard/MyPickups";
 import ReceivedDonations from "./Pages/DashBoard/CharityDashboard/ReceivedDonations";
+import TransactionHistory from "./Pages/DashBoard/CharityDashboard/TransactionHistory";
 
 
 export const router = createBrowserRouter([
@@ -133,6 +134,11 @@ export const router = createBrowserRouter([
             {
                 path:"/dashboard/charity/received-donations",
                 element:<ReceivedDonations></ReceivedDonations>
+            }
+            ,
+            {
+                path:"/dashboard/user-transactions",
+                element:<TransactionHistory></TransactionHistory>
             }
         ]
     },

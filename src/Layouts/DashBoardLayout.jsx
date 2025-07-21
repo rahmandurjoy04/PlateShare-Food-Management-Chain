@@ -219,7 +219,7 @@ const DashboardLayout = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/dashboard/charity/charity-transactions" className={({ isActive }) => isActive ? 'active' : ''}>
+                                <NavLink to="/dashboard/user-transactions" className={({ isActive }) => isActive ? 'active' : ''}>
                                     <FaMoneyCheckAlt className="inline-block mr-2" />
                                     Transaction History
                                 </NavLink>

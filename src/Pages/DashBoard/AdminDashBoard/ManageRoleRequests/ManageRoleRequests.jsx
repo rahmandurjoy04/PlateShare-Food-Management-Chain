@@ -43,7 +43,7 @@ const ManageRoleRequests = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center">Loading requests...</p>;
+  if (isLoading) return <p className="text-center text-3xl">Loading requests...</p>;
   if (isError)
     return (
       <p className="text-center text-red-600">
@@ -54,7 +54,7 @@ const ManageRoleRequests = () => {
   return (
     <div className="p-4 overflow-x-auto">
       <h2 className="text-2xl font-bold text-center mb-6">
-        Manage Role Requests
+        Manage Charity Role Requests
       </h2>
 
       <table className="table w-full border rounded-lg">

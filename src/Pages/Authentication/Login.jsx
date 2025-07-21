@@ -23,6 +23,21 @@ const Login = () => {
 
         loginUser(email, password)
             .then(() => {
+                // PATCH request to update last_login_at
+                fetch(`http://localhost:3000/users?email=${email}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ last_login_at: new Date().toISOString() }),
+                })
+                    .then(res => {
+                        if (!res.ok) {
+                            console.error('Failed to update last login time');
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error updating last login:', err);
+                    });
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Login Successful',
@@ -40,6 +55,7 @@ const Login = () => {
                 });
             });
     };
+
 
     return (
         <div className='p-6'>

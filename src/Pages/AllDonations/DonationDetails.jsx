@@ -6,18 +6,13 @@ import useAxiosSecure from '../../hoooks/useAxiosSecure';
 import useAuth from '../../hoooks/useAuth';
 import useGetUserRole from '../../hoooks/useGetUserRole';
 
-// Dummy user info - replace with your auth/user context
-const dummyUser = {
-    role: 'charity', // 'user' or 'charity'
-};
-
 
 const DonationDetails = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
     const { user } = useAuth();
-    const {role,roleLoading} = useGetUserRole();
+    const { role, roleLoading } = useGetUserRole();
 
     // States for modals and forms
     const [showRequestModal, setShowRequestModal] = useState(false);
@@ -75,7 +70,7 @@ const DonationDetails = () => {
                 pickupTime,
                 foodType: donation.foodType,
                 quantity: donation.quantity,
-                location:donation.location
+                location: donation.location
             });
         },
         onSuccess: () => {
@@ -104,12 +99,15 @@ const DonationDetails = () => {
     // Add Review mutation
     const addReviewMutation = useMutation({
         mutationFn: async () => {
-            return axiosSecure.post(`donations/${id}/reviews`, {
-                reviewerName: user.name,
+            return axiosSecure.post('/reviews', { 
+                post_id: id,
+                reviewerName: user.displayName || user.name,
+                reviewerEmail: user.email,
                 description: reviewDescription,
                 rating: reviewRating,
             });
         },
+
         onSuccess: () => {
             Swal.fire('Thank you!', 'Your review has been added.', 'success');
             setShowReviewModal(false);
@@ -142,12 +140,12 @@ const DonationDetails = () => {
 
                 <span
                     className={`px-3 py-1 rounded-full font-semibold uppercase tracking-wide ${donation.delivery_status === 'Available'
-                            ? 'bg-green-500 text-white'
-                            : donation.delivery_status === 'Requested'
-                                ? 'bg-yellow-500 text-black'
-                                : donation.delivery_status === 'Picked Up'
-                                    ? 'bg-gray-500 text-white'
-                                    : 'bg-blue-500 text-white'
+                        ? 'bg-green-500 text-white'
+                        : donation.delivery_status === 'Requested'
+                            ? 'bg-yellow-500 text-black'
+                            : donation.delivery_status === 'Picked Up'
+                                ? 'bg-gray-500 text-white'
+                                : 'bg-blue-500 text-white'
                         }`}
                 >
                     {donation.delivery_status}
@@ -326,7 +324,7 @@ const DonationDetails = () => {
                                 <label className="block font-semibold mb-1">Reviewer Name</label>
                                 <input
                                     type="text"
-                                    value={dummyUser.name}
+                                    value={user?.displayName}
                                     readOnly
                                     className="w-full border rounded p-2 bg-gray-100"
                                 />
