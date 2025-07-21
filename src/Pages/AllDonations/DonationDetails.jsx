@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hoooks/useAxiosSecure';
 import useAuth from '../../hoooks/useAuth';
 import useGetUserRole from '../../hoooks/useGetUserRole';
+import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 
 const DonationDetails = () => {
@@ -134,7 +135,7 @@ const DonationDetails = () => {
         },
     });
 
-    if (isLoading || roleLoading) return <div className="text-center mt-10">Loading details...</div>;
+    if (isLoading || roleLoading) return <LoadingSpinner></LoadingSpinner>;
     if (!donation) return <div className="text-center mt-10">Donation not found.</div>;
 
     // Example condition: show Confirm Pickup if charity and donation request status accepted
@@ -214,13 +215,47 @@ const DonationDetails = () => {
                     <p className="text-gray-600">No reviews yet.</p>
                 ) : (
                     <ul className="space-y-4 max-h-60 overflow-y-auto">
-                        {reviews.map((r) => (
-                            <li key={r._id} className="border rounded p-4 bg-gray-50 shadow-sm">
-                                <p className="font-semibold">{r.reviewerName}</p>
-                                <p>⭐ {r.rating} / 5</p>
-                                <p>{r.description}</p>
-                            </li>
-                        ))}
+                        <div className="flex flex-col gap-6 mt-6">
+                            {reviews.map((review) => (
+                                <div
+                                    key={review._id}
+                                    className="bg-white shadow-md border border-gray-200 rounded-xl p-5 transition hover:shadow-lg"
+                                >
+                                    {/* Top Section */}
+                                    <div className="flex items-center mb-4">
+                                        <div className="w-12 h-12 bg-blue-100 text-blue-700 flex items-center justify-center rounded-full text-xl font-bold">
+                                            {review.reviewerName?.charAt(0) || "U"}
+                                        </div>
+                                        <div className="ml-4">
+                                            <h3 className="text-lg font-semibold text-gray-800">{review.reviewerName}</h3>
+                                            <p className="text-sm text-gray-500">
+                                                {new Date(review.createdAt).toLocaleDateString()}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Review Content */}
+                                    <div className="mb-3 p-3 rounded-xl bg-gray-100">
+                                        <p className="text-gray-700">{review.description}</p>
+                                    </div>
+
+                                    {/* Stars */}
+                                    <div className="flex items-center">
+                                        {[...Array(5)].map((_, i) => (
+                                            <svg
+                                                key={i}
+                                                className={`w-5 h-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.259 3.89a1 1 0 00.95.69h4.104c.969 0 1.371 1.24.588 1.81l-3.32 2.413a1 1 0 00-.364 1.118l1.26 3.889c.3.921-.755 1.688-1.54 1.118l-3.32-2.413a1 1 0 00-1.176 0l-3.32 2.413c-.784.57-1.838-.197-1.539-1.118l1.26-3.889a1 1 0 00-.364-1.118L2.107 9.317c-.783-.57-.38-1.81.588-1.81h4.104a1 1 0 00.951-.69l1.259-3.89z" />
+                                            </svg>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
                     </ul>
                 )}
                 <button
