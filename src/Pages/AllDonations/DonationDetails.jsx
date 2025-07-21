@@ -44,18 +44,30 @@ const DonationDetails = () => {
     // Save to Favorites mutation
     const saveFavoriteMutation = useMutation({
         mutationFn: async () => {
-            return axiosSecure.post('/favorites', {
-                donationId: id,
+            return axiosSecure.post('favorites', {
+                donationId: donation._id,
                 userEmail: user.email,
+                donationTitle: donation.title,
+                donationImage: donation.image,
+                restaurantName: donation.restaurantName,
+                location: donation.location,
+                status: donation.delivery_status,
+                quantity: donation.quantity,
             });
         },
         onSuccess: () => {
             Swal.fire('Saved!', 'Donation saved to your favorites.', 'success');
         },
-        onError: () => {
-            Swal.fire('Error', 'Failed to save favorite.', 'error');
-        },
+        onError: (error) => {
+            if (error.response?.status === 409) {
+                Swal.fire('Already Saved', 'This donation is already in your favorites.', 'info');
+            } else {
+                Swal.fire('Error', 'Failed to save favorite.', 'error');
+            }
+        }
+
     });
+
 
     // Request Donation mutation
     const requestDonationMutation = useMutation({
@@ -99,14 +111,14 @@ const DonationDetails = () => {
     // Add Review mutation
     const addReviewMutation = useMutation({
         mutationFn: async () => {
-            return axiosSecure.post('reviews', { 
+            return axiosSecure.post('reviews', {
                 post_id: id,
                 reviewerName: user.displayName || user.name,
                 reviewerEmail: user.email,
                 description: reviewDescription,
                 rating: reviewRating,
-                resturant_name:donation.restaurantName,
-                donationTitle:donation.title,
+                resturant_name: donation.restaurantName,
+                donationTitle: donation.title,
             });
         },
 
