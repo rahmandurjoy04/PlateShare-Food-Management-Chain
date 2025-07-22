@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAxiosSecure from '../../../../hoooks/useAxiosSecure';
+import LoadingSpinner from '../../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const ManageRoleRequests = () => {
   const axiosSecure = useAxiosSecure();
@@ -43,7 +44,7 @@ const ManageRoleRequests = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center text-3xl">Loading requests...</p>;
+  if (isLoading) return <LoadingSpinner/>;
   if (isError)
     return (
       <p className="text-center text-red-600">

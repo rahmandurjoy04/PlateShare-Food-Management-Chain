@@ -160,7 +160,7 @@ const DashboardLayout = () => {
                     {/* Resturant Links */}
                     {!roleLoading && role === 'restaurant' && (
                         <>
-                            <li className="menu-title text-sm text-white/60 mt-2 mb-1">Resturant Controls</li>
+                            <li className="menu-title text-sm text-white/60 mt-2 mb-1">Restaurant Controls</li>
                             <li>
                                 <NavLink to="/dashboard/profile" className={({ isActive }) => isActive ? 'active' : ''}>
                                     <FaUserEdit className="inline-block mr-2" />
@@ -235,7 +235,12 @@ const DashboardLayout = () => {
                                     Received Donations
                                 </NavLink>
                             </li>
-
+                            <li>
+                                <NavLink to="/dashboard/favorites" className={({ isActive }) => isActive ? 'active' : ''}>
+                                    <FaStar className="inline-block mr-2" />
+                                    My Favorites
+                                </NavLink>
+                            </li>
                             <li>
                                 <NavLink to="/dashboard/user-transactions" className={({ isActive }) => isActive ? 'active' : ''}>
                                     <FaMoneyCheckAlt className="inline-block mr-2" />

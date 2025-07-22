@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from './hoooks/useAxiosSecure';
 import useAuth from './hoooks/useAuth';
+import LoadingSpinner from './Shared/LoadingSpinner/LoadingSpinner';
 
 const MyFavorites = () => {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ const MyFavorites = () => {
     });
   };
 
-  if (isLoading) return <p className="text-center mt-8">Loading favorites...</p>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   if (isError) return <p className="text-center mt-8 text-red-600">Error: {error.message}</p>;
   if (!favorites || favorites.length === 0) return <p className="text-center mt-8">No favorites found.</p>;
 

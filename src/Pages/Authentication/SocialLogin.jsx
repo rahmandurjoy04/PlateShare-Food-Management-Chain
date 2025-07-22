@@ -1,13 +1,14 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router';
-import axios from 'axios';
 import useAuth from '../../hoooks/useAuth';
+import useAxios from '../../hoooks/useAxios';
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosInstance = useAxios();
 
   const from = location.state?.from?.pathname || "/";
 
@@ -36,10 +37,10 @@ const SocialLogin = () => {
       let userRole = 'user';
 
       try {
-        const res = await axios.get(`http://localhost:3000/users?email=${email}`);
+        const res = await axiosInstance.get(`users/email/?email=${email}`);
         userRole = res.data.role;
 
-        await axios.patch(`http://localhost:3000/users?email=${email}`, {
+        await axiosInstance.patch(`users?email=${email}`, {
           last_login_at,
           role: userRole,
         });
@@ -52,7 +53,7 @@ const SocialLogin = () => {
       }
 
       if (isNewUser) {
-        await axios.post('http://localhost:3000/users', savedUser);
+        await axiosInstance.post('users', savedUser);
       }
 
       Swal.fire({

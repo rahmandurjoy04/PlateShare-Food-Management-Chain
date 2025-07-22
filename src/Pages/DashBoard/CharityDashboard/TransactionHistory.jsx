@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hoooks/useAuth';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
@@ -28,7 +29,7 @@ const TransactionHistory = () => {
   }, [user?.email, axiosSecure]);
 
   if (loading) {
-    return <p className="text-center py-8">Loading transaction history...</p>;
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   if (transactions.length === 0) {

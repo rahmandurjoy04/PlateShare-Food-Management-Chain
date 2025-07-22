@@ -13,7 +13,7 @@ const FeaturedDonations = () => {
   useEffect(() => {
     const fetchFeaturedDonations = async () => {
       try {
-        const response = await axiosSecure.get('/featuredDonations');
+        const response = await axiosSecure.get('featuredDonations');
         setDonations(response.data);
       } catch (error) {
         console.error('Failed to fetch featured donations:', error);

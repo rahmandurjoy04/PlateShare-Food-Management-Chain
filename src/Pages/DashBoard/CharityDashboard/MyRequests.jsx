@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
 import useAuth from '../../../hoooks/useAuth';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const MyRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -16,7 +17,7 @@ const MyRequests = () => {
 
     setLoading(true);
     axiosSecure
-      .get(`/donation-requests?charityEmail=${encodeURIComponent(email)}`)
+      .get(`donation-requests?charityEmail=${encodeURIComponent(email)}`)
       .then((res) => {
         setRequests(res.data || []);
       })
@@ -40,7 +41,7 @@ const MyRequests = () => {
 
     if (result.isConfirmed) {
       try {
-        const res = await axiosSecure.delete(`/donation-requests/${requestId}`);
+        const res = await axiosSecure.delete(`donation-requests/charity/${requestId}`);
         if (res.status === 200) {
           Swal.fire('Cancelled', 'Your request has been cancelled.', 'success');
           setRequests((prev) => prev.filter((r) => r._id !== requestId));
@@ -56,7 +57,7 @@ const MyRequests = () => {
     <div className="max-w-7xl mx-auto px-4 py-6">
       <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">My Requests</h2>
 
-      {loading && <p className="text-center text-gray-600">Loading your requests...</p>}
+      {loading && <LoadingSpinner></LoadingSpinner>}
 
       {!loading && requests.length === 0 && (
         <p className="text-center text-gray-500">You have not made any donation requests yet.</p>

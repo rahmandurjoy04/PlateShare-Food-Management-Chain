@@ -25,12 +25,10 @@ const MyProfile = () => {
     queryKey: ['user', user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`users?email=${user?.email}`);
+      const res = await axiosSecure.get(`users/email?email=${user?.email}`);
       return res.data;
     },
   });
-
-  console.log(userInfo);
 
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   if (error) return <div className="text-center text-red-600 py-10">Failed to load profile.</div>;

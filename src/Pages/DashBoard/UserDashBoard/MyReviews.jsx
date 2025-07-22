@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import useAuth from '../../../hoooks/useAuth';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const MyReviews = () => {
   const { user } = useAuth();
@@ -48,7 +49,7 @@ const MyReviews = () => {
     });
   };
 
-  if (isLoading) return <p className="text-center text-lg">Loading your reviews...</p>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="p-4 max-w-7xl mx-auto">

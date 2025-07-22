@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const FeatureDonations = () => {
   const axiosSecure = useAxiosSecure();
@@ -31,7 +32,7 @@ const FeatureDonations = () => {
     }
   });
 
-  if (isLoading) return <div className="text-center mt-10">Loading donations...</div>;
+  if (isLoading) return <LoadingSpinner/>;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">

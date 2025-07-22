@@ -7,12 +7,11 @@ import useAuth from '../../hoooks/useAuth';
 import useGetUserRole from '../../hoooks/useGetUserRole';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
-
 const DonationDetails = () => {
-    const { id } = useParams();
+    const { id } = useParams(); // This is the donationId, e.g., "687f7f194c3081a6d6d219c8"
     const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
-    const { user } = useAuth();
+    const { user } = useAuth(); // Contains user.email, e.g., "charity@plateshare.com"
     const { role, roleLoading } = useGetUserRole();
 
     // States for modals and forms
@@ -32,7 +31,22 @@ const DonationDetails = () => {
         },
     });
 
-    // Fetch reviews
+    // Fetch donation requests to check if the current user has already requested
+    const { data: donationRequests = [], isLoading: requestsLoading } = useQuery({
+        queryKey: ['donationRequests', id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`donation-requests/${id}`);
+            return res.data; // Expects array of requests like the one you provided
+        },
+        enabled: !!id,
+    });
+
+    // Check if the current user has already requested this donation
+    const hasRequested = donationRequests.some(
+        (request) => request.charityEmail === user?.email
+    ); // Matches "charity@plateshare.com" in your data
+
+    // Fetch reviews (unchanged)
     const { data: reviews = [], refetch: refetchReviews } = useQuery({
         queryKey: ['donationReviews', id],
         queryFn: async () => {
@@ -42,7 +56,7 @@ const DonationDetails = () => {
         enabled: !!id,
     });
 
-    // Save to Favorites mutation
+    // Save to Favorites mutation (unchanged)
     const saveFavoriteMutation = useMutation({
         mutationFn: async () => {
             return axiosSecure.post('favorites', {
@@ -65,10 +79,8 @@ const DonationDetails = () => {
             } else {
                 Swal.fire('Error', 'Failed to save favorite.', 'error');
             }
-        }
-
+        },
     });
-
 
     // Request Donation mutation
     const requestDonationMutation = useMutation({
@@ -84,19 +96,21 @@ const DonationDetails = () => {
                 foodType: donation.foodType,
                 quantity: donation.quantity,
                 location: donation.location,
-                image:user.photoURL
+                image: user.photoURL,
             });
         },
         onSuccess: () => {
             Swal.fire('Request Sent', 'Your request is pending approval.', 'success');
             setShowRequestModal(false);
+            queryClient.invalidateQueries(['donationRequests', id]); // Refresh requests to update hasRequested
         },
         onError: () => {
             Swal.fire('Error', 'Failed to send request.', 'error');
         },
     });
 
-    // Confirm Pickup mutation
+    // Confirm Pickup mutation (unchanged)
+    const canConfirmPickup = role === 'charity' && donation?.delivery_status === 'Requested';
     const confirmPickupMutation = useMutation({
         mutationFn: async () => {
             return axiosSecure.patch(`donations/${id}/pickup`);
@@ -111,38 +125,32 @@ const DonationDetails = () => {
     });
 
     // Add Review mutation
-    const addReviewMutation = useMutation({
-        mutationFn: async () => {
-            return axiosSecure.post('reviews', {
-                post_id: id,
-                reviewerName: user.displayName || user.name,
-                reviewerEmail: user.email,
-                description: reviewDescription,
-                rating: reviewRating,
-                resturant_name: donation.restaurantName,
-                donationTitle: donation.title,
-            });
-        },
+const addReviewMutation = useMutation({
+    mutationFn: async () => {
+        return axiosSecure.post('reviews', {
+            post_id: id,
+            reviewerName: user.displayName || user.name,
+            reviewerEmail: user.email,
+            description: reviewDescription,
+            rating: reviewRating,
+            resturant_name: donation.restaurantName,
+            donationTitle: donation.title,
+        });
+    },
+    onSuccess: () => {
+        Swal.fire('Thank you!', 'Your review has been added.', 'success');
+        setShowReviewModal(false); // Corrected line
+        setReviewDescription('');
+        setReviewRating(5);
+        refetchReviews();
+    },
+    onError: () => {
+        Swal.fire('Error', 'Failed to add review.', 'error');
+    },
+});
 
-        onSuccess: () => {
-            Swal.fire('Thank you!', 'Your review has been added.', 'success');
-            setShowReviewModal(false);
-            setReviewDescription('');
-            setReviewRating(5);
-            refetchReviews();
-        },
-        onError: () => {
-            Swal.fire('Error', 'Failed to add review.', 'error');
-        },
-    });
-
-    if (isLoading || roleLoading) return <LoadingSpinner></LoadingSpinner>;
+    if (isLoading || roleLoading || requestsLoading) return <LoadingSpinner />;
     if (!donation) return <div className="text-center mt-10">Donation not found.</div>;
-
-    // Example condition: show Confirm Pickup if charity and donation request status accepted
-    // You'll need to adapt this based on your real data structure
-    const canConfirmPickup = role === 'charity' && donation.delivery_status === 'Requested';
-    console.log(role);
 
     return (
         <div className="max-w-xl min-w-sm mx-auto bg-white shadow-lg rounded p-8 my-10 space-y-6">
@@ -153,16 +161,16 @@ const DonationDetails = () => {
             <h1 className="text-4xl font-bold text-blue-900">{donation.title}</h1>
 
             <div className="flex items-center space-x-3 mt-1">
-
                 <span
-                    className={`px-3 py-1 rounded-full font-semibold uppercase tracking-wide ${donation.delivery_status === 'Available'
-                        ? 'bg-green-500 text-white'
-                        : donation.delivery_status === 'Requested'
+                    className={`px-3 py-1 rounded-full font-semibold uppercase tracking-wide ${
+                        donation.delivery_status === 'Available'
+                            ? 'bg-green-500 text-white'
+                            : donation.delivery_status === 'Requested'
                             ? 'bg-yellow-500 text-black'
                             : donation.delivery_status === 'Picked Up'
-                                ? 'bg-gray-500 text-white'
-                                : 'bg-blue-500 text-white'
-                        }`}
+                            ? 'bg-gray-500 text-white'
+                            : 'bg-blue-500 text-white'
+                    }`}
                 >
                     {donation.delivery_status}
                 </span>
@@ -177,26 +185,34 @@ const DonationDetails = () => {
             </div>
 
             {/* Action buttons */}
-            <div className="flex flex-col space-y-4 ">
+            <div className="flex flex-col space-y-4">
                 {/* Save to Favorites */}
-                
-                {(role === 'charity'|| role==='user') && (
+                {(role === 'charity' || role === 'user') && (
                     <button
-                    onClick={() => saveFavoriteMutation.mutate()}
-                    disabled={saveFavoriteMutation.isLoading}
-                    className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 rounded-md transition"
-                >
-                    {saveFavoriteMutation.isLoading ? 'Saving...' : 'Save to Favorites'}
-                </button>
+                        onClick={() => saveFavoriteMutation.mutate()}
+                        disabled={saveFavoriteMutation.isLoading}
+                        className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 rounded-md transition"
+                    >
+                        {saveFavoriteMutation.isLoading ? 'Saving...' : 'Save to Favorites'}
+                    </button>
                 )}
 
                 {/* Request Donation (Charity only) */}
                 {role === 'charity' && donation.delivery_status === 'Available' && (
                     <button
                         onClick={() => setShowRequestModal(true)}
-                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 rounded-md transition"
+                        disabled={hasRequested || requestDonationMutation.isLoading}
+                        className={`w-full font-semibold py-2 rounded-md transition ${
+                            hasRequested
+                                ? 'bg-gray-400 text-white cursor-not-allowed'
+                                : 'bg-yellow-500 hover:bg-yellow-600 text-black'
+                        }`}
                     >
-                        Request Donation
+                        {hasRequested
+                            ? 'Already Requested'
+                            : requestDonationMutation.isLoading
+                            ? 'Requesting...'
+                            : 'Request Donation'}
                     </button>
                 )}
 
@@ -225,10 +241,9 @@ const DonationDetails = () => {
                                     key={review._id}
                                     className="bg-white shadow-md border border-gray-200 rounded-xl p-5 transition hover:shadow-lg"
                                 >
-                                    {/* Top Section */}
                                     <div className="flex items-center mb-4">
                                         <div className="w-12 h-12 bg-blue-100 text-blue-700 flex items-center justify-center rounded-full text-xl font-bold">
-                                            {review.reviewerName?.charAt(0) || "U"}
+                                            {review.reviewerName?.charAt(0) || 'U'}
                                         </div>
                                         <div className="ml-4">
                                             <h3 className="text-lg font-semibold text-gray-800">{review.reviewerName}</h3>
@@ -237,13 +252,9 @@ const DonationDetails = () => {
                                             </p>
                                         </div>
                                     </div>
-
-                                    {/* Review Content */}
                                     <div className="mb-3 p-3 rounded-xl bg-gray-100">
                                         <p className="text-gray-700">{review.description}</p>
                                     </div>
-
-                                    {/* Stars */}
                                     <div className="flex items-center">
                                         {[...Array(5)].map((_, i) => (
                                             <svg
@@ -259,7 +270,6 @@ const DonationDetails = () => {
                                 </div>
                             ))}
                         </div>
-
                     </ul>
                 )}
                 <button
@@ -339,7 +349,6 @@ const DonationDetails = () => {
                                     className="w-full border rounded p-2"
                                 />
                             </div>
-
                             <div className="flex justify-end space-x-3 mt-4">
                                 <button
                                     type="button"
@@ -405,7 +414,6 @@ const DonationDetails = () => {
                                     rows={3}
                                 />
                             </div>
-
                             <div className="flex justify-end space-x-3 mt-4">
                                 <button
                                     type="button"

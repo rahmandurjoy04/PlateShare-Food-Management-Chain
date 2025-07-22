@@ -6,10 +6,11 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import PlateShareLogo from '../../Shared/PlateShareLogo/PlateShareLogo';
 import SocialLogin from './SocialLogin';
 import useAuth from '../../hoooks/useAuth';
-import axios from 'axios';
+import useAxios from '../../hoooks/useAxios';
 
 const Register = () => {
     const { registerUser } = useAuth();
+    const axiosInstance = useAxios();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -69,7 +70,7 @@ const Register = () => {
             };
 
             // Save user via Axios
-            await axios.post('http://localhost:3000/users', savedUser); // replace with your actual backend URL
+            await axiosInstance.post('users', savedUser);
 
             // Show success alert
             Swal.fire({

@@ -28,12 +28,20 @@ import TransactionHistory from "./Pages/DashBoard/CharityDashboard/TransactionHi
 import MyReviews from "./Pages/DashBoard/UserDashBoard/MyReviews";
 import MyFavorites from "./MyFavorites";
 import DonationStats from "./Pages/DashBoard/ResturantDashboard/DonationStats";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import AdminRoute from "./Routes/AdminRoute";
+import ResturantRoute from "./Routes/ResturantRoute";
+import CharityRoute from "./Routes/CharityRoute";
+import TransactionRoute from "./Routes/TransactionRoute";
+import UserRoute from "./Routes/UserRoute";
 
 
 export const router = createBrowserRouter([
     {
         path: '/',
         Component: RootLayout,
+        errorElement: <ErrorPage />,
+
         children: [
             {
                 index: true,
@@ -61,109 +69,165 @@ export const router = createBrowserRouter([
             <PrivateRoute>
                 <DashboardLayout></DashboardLayout>
             </PrivateRoute>,
+        errorElement: <ErrorPage />,
+
         children: [
             {
                 index: true,
                 element: <DashBoardHome></DashBoardHome>
+            }
+            ,
+            {
+                path: '/dashboard/profile',
+                element: <MyProfile></MyProfile>
+            }
+            ,
+            
+            {
+                path: '/dashboard/payment/charity',
+                element: <CharityRolePayment></CharityRolePayment>
+            }
+            ,
+            
+            // Admin Dashboard
+
+            {
+                path: "/dashboard/manage-donations",
+                element: <AdminRoute>
+                    <ManageDonations></ManageDonations>
+                </AdminRoute>
+            }
+            ,
+            {
+                path: "/dashboard/manage-users",
+                element:
+                    <AdminRoute>
+                        <ManageUsers></ManageUsers>
+                    </AdminRoute>
+            }
+            ,
+            {
+                path: "/dashboard/manage-role-requests",
+                element:
+                    <AdminRoute>
+                        <ManageRoleRequests></ManageRoleRequests>
+                    </AdminRoute>
+            }
+            ,
+            {
+                path: "/dashboard/manage-requests",
+                element:
+                    <AdminRoute>
+                        <ManageRequests></ManageRequests>
+                    </AdminRoute>
+            }
+            ,
+            {
+                path: "/dashboard/feature-donations",
+                element:
+                    <AdminRoute>
+                        <FeatureDonations></FeatureDonations>
+                    </AdminRoute>
+            }
+            ,
+            // Resturant Routes
+            {
+                path: "/dashboard/restaurant/donation-stats",
+                element: <ResturantRoute>
+                    <DonationStats></DonationStats>
+                </ResturantRoute>
+            }
+            ,
+            {
+                path: "/dashboard/restaurant/add-donation",
+                element: <ResturantRoute>
+                    <AddDonationForm></AddDonationForm>
+                </ResturantRoute>
+            }
+            ,
+            {
+                path: "/dashboard/restaurant/my-donations",
+                element:
+                    <ResturantRoute>
+                        <MyDonations></MyDonations>
+                    </ResturantRoute>
+            }
+            ,
+            {
+                path: "/dashboard/restaurant/requested-donations",
+                element:
+                    <ResturantRoute>
+                        <RequestedDonations></RequestedDonations>
+                    </ResturantRoute>
+            }
+            ,
+            {
+                path: "/dashboard/restaurant/update-donation/:id",
+                element: <ResturantRoute>
+                    <UpdateDonation></UpdateDonation>
+                </ResturantRoute>
+            }
+            ,
+            // Charity Routes
+            {
+                path: "/dashboard/charity/my-requests",
+                element: <CharityRoute>
+                    <MyRequests></MyRequests>
+                </CharityRoute>
+            }
+            ,
+            {
+                path: "/dashboard/charity/my-pickups",
+                element: <CharityRoute>
+                    <MyPickups></MyPickups>
+                </CharityRoute>
+            }
+            ,
+            {
+                path: "/dashboard/charity/received-donations",
+                element: <CharityRoute>
+                    <ReceivedDonations></ReceivedDonations>
+                </CharityRoute>
+            }
+            ,
+            // Shared Route for user and charity
+            {
+                path: "/dashboard/user-transactions",
+                element:
+                    <TransactionRoute>
+                        <TransactionHistory></TransactionHistory>
+                    </TransactionRoute>
+            }
+            ,
+            // User Routes
+            {
+                path: "/dashboard/my-reviews",
+                element: 
+                <UserRoute>
+                    <MyReviews></MyReviews>
+                </UserRoute>
+            }
+            ,
+            {
+                path: "/dashboard/favorites",
+                element:
+                    <MyFavorites></MyFavorites>
             },
             {
-                path:'/dashboard/profile',
-                element:<MyProfile></MyProfile>
-            }
-            ,
-            {
-                path:'/dashboard/request-charity-role',
-                element:<RequestCharityRole></RequestCharityRole>
+                path: '/dashboard/request-charity-role',
+                element: <UserRoute>
+                    <RequestCharityRole></RequestCharityRole>
+                </UserRoute>
             },
-            {
-                path:'/dashboard/payment/charity',
-                element:<CharityRolePayment></CharityRolePayment>
-            },
-            {
-                path:"/dashboard/manage-users",
-                element:<ManageUsers></ManageUsers>
-            }
-            ,
-            {
-                path:"/dashboard/manage-role-requests",
-                element:<ManageRoleRequests></ManageRoleRequests>
-            }
-            ,
-            {
-                path:"/dashboard/restaurant/add-donation",
-                element:<AddDonationForm></AddDonationForm>
-            }
-            ,
-            {
-                path:"/dashboard/restaurant/my-donations",
-                element:<MyDonations></MyDonations>
-            }
-            ,
-            {
-                path:"/dashboard/restaurant/update-donation/:id",
-                element:<UpdateDonation></UpdateDonation>
-            }
-            ,
-            {
-                path:"/dashboard/manage-donations",
-                element:<ManageDonations></ManageDonations>
-            }
-            ,
-            {
-                path:"/dashboard/manage-requests",
-                element:<ManageRequests></ManageRequests>
-            }
-            ,
-            {
-                path:"/dashboard/feature-donations",
-                element:<FeatureDonations></FeatureDonations>
-            }
-            ,
-            {
-                path:"/dashboard/restaurant/requested-donations",
-                element:<RequestedDonations></RequestedDonations>
-            }
-            ,
-            {
-                path:"/dashboard/restaurant/donation-stats",
-                element:<DonationStats></DonationStats>
-            }
-            ,
-            {
-                path:"/dashboard/charity/my-requests",
-                element:<MyRequests></MyRequests>
-            }
-            ,
-            {
-                path:"/dashboard/charity/my-pickups",
-                element:<MyPickups></MyPickups>
-            }
-            ,
-            {
-                path:"/dashboard/charity/received-donations",
-                element:<ReceivedDonations></ReceivedDonations>
-            }
-            ,
-            {
-                path:"/dashboard/user-transactions",
-                element:<TransactionHistory></TransactionHistory>
-            }
-            ,
-            {
-                path:"/dashboard/my-reviews",
-                element:<MyReviews></MyReviews>
-            }
-            ,
-            {
-                path:"/dashboard/favorites",
-                element:<MyFavorites></MyFavorites>
-            }
+
         ]
     },
     // Parent Layout for Authentication
     {
         path: '/',
         element: <AuthLayout></AuthLayout>,
+        errorElement: <ErrorPage />,
+
         children: [
             {
                 path: '/login',

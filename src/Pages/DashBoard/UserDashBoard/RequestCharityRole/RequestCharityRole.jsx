@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router';
 import useAxiosSecure from '../../../../hoooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import LoadingSpinner from '../../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const RequestCharityRole = () => {
     const { user } = useAuth();
@@ -80,7 +81,7 @@ const RequestCharityRole = () => {
         }
     };
 
-    if (isLoading) return <div>Loading your role requests...</div>;
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>;
     if (error) return <div>Error loading role requests: {error.message}</div>;
 
     if (data?.charity_role_status === 'pending') {

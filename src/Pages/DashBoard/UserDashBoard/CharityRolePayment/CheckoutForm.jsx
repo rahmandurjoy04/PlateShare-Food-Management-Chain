@@ -23,7 +23,7 @@ const CheckoutForm = () => {
     const { isPending, data } = useQuery({
         queryKey: ['users', requested_by],
         queryFn: async () => {
-            const res = await axiosSecure.get(`users?email=${requested_by}`);
+            const res = await axiosSecure.get(`users/email?email=${requested_by}`);
             return res.data;
         }
     });
@@ -50,7 +50,7 @@ const CheckoutForm = () => {
         setProcessing(true);
 
         // Step 1: Create payment intent
-        const { data: intentRes } = await axiosSecure.post('/create-payment-intent', {
+        const { data: intentRes } = await axiosSecure.post('create-payment-intent', {
             amount: amountInCents,
             requested_by,
         });

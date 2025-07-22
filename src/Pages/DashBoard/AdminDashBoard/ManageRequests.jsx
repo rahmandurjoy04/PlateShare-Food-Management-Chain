@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const ManageRequests = () => {
     const axiosSecure = useAxiosSecure();
@@ -10,7 +11,7 @@ const ManageRequests = () => {
     const { data: requests = [], isLoading, refetch } = useQuery({
         queryKey: ['donationRequests'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/donation-requests');
+            const res = await axiosSecure.get('donation-requests');
             return res.data;
         },
     });
@@ -52,7 +53,7 @@ const ManageRequests = () => {
         }
     };
 
-    if (isLoading) return <div className="text-center mt-10">Loading requests...</div>;
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10">

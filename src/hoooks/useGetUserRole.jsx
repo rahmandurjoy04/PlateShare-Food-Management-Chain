@@ -20,7 +20,7 @@ const useGetUserRole = () => {
     setRoleLoading(true);
     setError(null);
 
-    axiosSecure.get(`users?email=${encodeURIComponent(email)}`)
+    axiosSecure.get(`users/email?email=${encodeURIComponent(email)}`)
       .then(res => {
         if (res.data && res.data.role) {
           setRole(res.data.role);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
 import useAuth from '../../../hoooks/useAuth';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const ReceivedDonations = () => {
   const [receivedDonations, setReceivedDonations] = useState([]);
@@ -56,7 +57,7 @@ const ReceivedDonations = () => {
 
     try {
       // Example API call to submit review — adjust endpoint as needed
-      await axiosSecure.post('/donation-reviews', {
+      await axiosSecure.post('donation-reviews', {
         donationId: currentDonation._id,
         review: reviewText.trim(),
         charityEmail,
@@ -69,7 +70,7 @@ const ReceivedDonations = () => {
     }
   };
 
-  if (loading) return <p className="text-center mt-8 text-lg">Loading received donations...</p>;
+  if (loading) return <LoadingSpinner></LoadingSpinner>;
   if (error) return <p className="text-center mt-8 text-red-500">{error}</p>;
   if (receivedDonations.length === 0)
     return <p className="text-center text-4xl mt-8 text-gray-500">No received donations found.</p>;

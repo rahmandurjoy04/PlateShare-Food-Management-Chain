@@ -8,7 +8,7 @@ const LatestCharityRequests = () => {
   const { data: charityRequests = [], isLoading } = useQuery({
     queryKey: ['latestCharityRequests'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/charity-requests');
+      const res = await axiosSecure.get('charity-requests');
       return res.data;
     },
   });

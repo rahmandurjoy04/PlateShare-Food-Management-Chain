@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const ManageDonations = () => {
   const axiosSecure = useAxiosSecure();
@@ -11,7 +12,7 @@ const ManageDonations = () => {
   const { data: donations = [], isLoading } = useQuery({
     queryKey: ['donations'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/donations');
+      const res = await axiosSecure.get('donations');
       return res.data;
     },
   });
@@ -19,7 +20,7 @@ const ManageDonations = () => {
   // Mutation for updating donation status
   const { mutate: updateStatus } = useMutation({
     mutationFn: async ({ id, status }) => {
-      const res = await axiosSecure.patch(`/donations/${id}/status`, { status });
+      const res = await axiosSecure.patch(`donations/${id}/status`, { status });
       return res.data;
     },
     onSuccess: (data, variables) => {
@@ -31,7 +32,7 @@ const ManageDonations = () => {
     },
   });
 
-  if (isLoading) return <div className="text-center mt-10">Loading donations...</div>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="max-w-7xl mx-auto p-6">

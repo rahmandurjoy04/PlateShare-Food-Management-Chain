@@ -26,7 +26,6 @@ const Navbar = () => {
     });
   };
 
-  console.log(user);
 
   const navLinks = (
     <>
@@ -113,6 +112,7 @@ const Navbar = () => {
                       <img
                         src={user?.photoURL}
                         alt="User"
+                        referrerPolicy="no-referrer"
                         className="w-9 h-9 rounded-full border border-white"
                       />
                     )}
