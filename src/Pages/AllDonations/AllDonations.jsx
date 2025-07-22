@@ -38,12 +38,11 @@ const AllDonations = () => {
 
   // Filter and sort donations
   let filteredDonations = donations;
-
   if (searchTerm) {
-    filteredDonations = filteredDonations.filter((donation) => {
-      const city = donation.location.split(',').pop().trim().toLowerCase();
-      return city.includes(searchTerm.toLowerCase());
-    });
+    const searchRegex = new RegExp(searchTerm.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), 'i');
+    filteredDonations = donations.filter((donation) =>
+      searchRegex.test(donation.location || '')
+    );
   }
 
   if (sortType === 'quantity-asc') {
