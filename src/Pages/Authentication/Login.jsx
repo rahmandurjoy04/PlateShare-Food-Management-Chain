@@ -5,9 +5,11 @@ import { useForm } from 'react-hook-form';
 import SocialLogin from './SocialLogin';
 import Swal from 'sweetalert2';
 import useAuth from '../../hoooks/useAuth';
+import useAxios from '../../hoooks/useAxios';
 
 const Login = () => {
     const { loginUser } = useAuth();
+    const axiosInstance = useAxios();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -22,22 +24,11 @@ const Login = () => {
         const { email, password } = data;
 
         loginUser(email, password)
-            .then(() => {
+            .then(async () => {
                 // PATCH request to update last_login_at
-                fetch(`http://localhost:3000/users?email=${email}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ last_login_at: new Date().toISOString() }),
-                })
-                    .then(res => {
-                        if (!res.ok) {
-                            console.error('Failed to update last login time');
-                        }
-                    })
-                    .catch(err => {
-                        console.error('Error updating last login:', err);
-                    });
-
+                await axiosInstance.patch(`users/email?email=${email}`, {
+                    last_login_at: new Date().toISOString(),
+                });
                 Swal.fire({
                     icon: 'success',
                     title: 'Login Successful',

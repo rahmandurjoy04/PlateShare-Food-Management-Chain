@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
 
 const UpdateDonation = () => {
@@ -47,11 +46,17 @@ const UpdateDonation = () => {
             if (data.image?.[0]) {
                 const formData = new FormData();
                 formData.append('image', data.image[0]);
-                const imgbbRes = await axios.patch(
-                    `https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`,
-                    formData
-                );
-                imageUrl = imgbbRes.data.data.url;
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const imgbbData = await res.json();
+                if (!imgbbData.success || !imgbbData.data?.url) {
+                    throw new Error('Image upload failed');
+                }
+                imageUrl = imgbbData?.data?.url;
+
             }
 
             const updatedDonation = {

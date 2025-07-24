@@ -40,7 +40,7 @@ const SocialLogin = () => {
         const res = await axiosInstance.get(`users/email/?email=${email}`);
         userRole = res.data.role;
 
-        await axiosInstance.patch(`users?email=${email}`, {
+        await axiosInstance.patch(`users/email?email=${email}`, {
           last_login_at,
           role: userRole,
         });
