@@ -36,7 +36,7 @@ const DonationDetails = () => {
         queryKey: ['donationRequests', id],
         queryFn: async () => {
             const res = await axiosSecure.get(`donation-requests/${id}`);
-            return res.data; // Expects array of requests like the one you provided
+            return res.data;
         },
         enabled: !!id,
     });
@@ -125,29 +125,29 @@ const DonationDetails = () => {
     });
 
     // Add Review mutation
-const addReviewMutation = useMutation({
-    mutationFn: async () => {
-        return axiosSecure.post('reviews', {
-            post_id: id,
-            reviewerName: user.displayName || user.name,
-            reviewerEmail: user.email,
-            description: reviewDescription,
-            rating: reviewRating,
-            resturant_name: donation.restaurantName,
-            donationTitle: donation.title,
-        });
-    },
-    onSuccess: () => {
-        Swal.fire('Thank you!', 'Your review has been added.', 'success');
-        setShowReviewModal(false); // Corrected line
-        setReviewDescription('');
-        setReviewRating(5);
-        refetchReviews();
-    },
-    onError: () => {
-        Swal.fire('Error', 'Failed to add review.', 'error');
-    },
-});
+    const addReviewMutation = useMutation({
+        mutationFn: async () => {
+            return axiosSecure.post('reviews', {
+                post_id: id,
+                reviewerName: user.displayName || user.name,
+                reviewerEmail: user.email,
+                description: reviewDescription,
+                rating: reviewRating,
+                resturant_name: donation.restaurantName,
+                donationTitle: donation.title,
+            });
+        },
+        onSuccess: () => {
+            Swal.fire('Thank you!', 'Your review has been added.', 'success');
+            setShowReviewModal(false); // Corrected line
+            setReviewDescription('');
+            setReviewRating(5);
+            refetchReviews();
+        },
+        onError: () => {
+            Swal.fire('Error', 'Failed to add review.', 'error');
+        },
+    });
 
     if (isLoading || roleLoading || requestsLoading) return <LoadingSpinner />;
     if (!donation) return <div className="text-center mt-10">Donation not found.</div>;
@@ -162,15 +162,14 @@ const addReviewMutation = useMutation({
 
             <div className="flex items-center space-x-3 mt-1">
                 <span
-                    className={`px-3 py-1 rounded-full font-semibold uppercase tracking-wide ${
-                        donation.delivery_status === 'Available'
+                    className={`px-3 py-1 rounded-full font-semibold uppercase tracking-wide ${donation.delivery_status === 'Available'
                             ? 'bg-green-500 text-white'
                             : donation.delivery_status === 'Requested'
-                            ? 'bg-yellow-500 text-black'
-                            : donation.delivery_status === 'Picked Up'
-                            ? 'bg-gray-500 text-white'
-                            : 'bg-blue-500 text-white'
-                    }`}
+                                ? 'bg-yellow-500 text-black'
+                                : donation.delivery_status === 'Picked Up'
+                                    ? 'bg-gray-500 text-white'
+                                    : 'bg-blue-500 text-white'
+                        }`}
                 >
                     {donation.delivery_status}
                 </span>
@@ -202,17 +201,16 @@ const addReviewMutation = useMutation({
                     <button
                         onClick={() => setShowRequestModal(true)}
                         disabled={hasRequested || requestDonationMutation.isLoading}
-                        className={`w-full font-semibold py-2 rounded-md transition ${
-                            hasRequested
+                        className={`w-full font-semibold py-2 rounded-md transition ${hasRequested
                                 ? 'bg-gray-400 text-white cursor-not-allowed'
                                 : 'bg-yellow-500 hover:bg-yellow-600 text-black'
-                        }`}
+                            }`}
                     >
                         {hasRequested
                             ? 'Already Requested'
                             : requestDonationMutation.isLoading
-                            ? 'Requesting...'
-                            : 'Request Donation'}
+                                ? 'Requesting...'
+                                : 'Request Donation'}
                     </button>
                 )}
 
@@ -272,12 +270,16 @@ const addReviewMutation = useMutation({
                         </div>
                     </ul>
                 )}
-                <button
-                    onClick={() => setShowReviewModal(true)}
-                    className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md"
-                >
-                    Add Review
-                </button>
+                {
+                    user && <>
+                        <button
+                            onClick={() => setShowReviewModal(true)}
+                            className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md"
+                        >
+                            Add Review
+                        </button>
+                    </>
+                }
             </section>
 
             {/* Request Donation Modal */}

@@ -45,12 +45,24 @@ const Navbar = () => {
           All Donations
         </NavLink>
       </li>
+      {
+        user && <>
+          <li>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) => isActive ? 'active' : ''}
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        </>
+      }
       <li>
         <NavLink
-          to="/dashboard"
+          to="/about"
           className={({ isActive }) => isActive ? 'active' : ''}
         >
-          Dashboard
+          About
         </NavLink>
       </li>
     </>
@@ -107,7 +119,7 @@ const Navbar = () => {
               user ?
                 (
                   <>
-                    <div className="text-white hidden md:flex items-center gap-2">
+                    <div className="text-text hidden md:flex items-center gap-2">
                       <span>{user.displayName || user.email}</span>
                       {user.photoURL && (
                         <img

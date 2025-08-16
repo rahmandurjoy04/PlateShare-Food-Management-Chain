@@ -4,8 +4,8 @@ import { Link } from "react-router";
 
 const Footer = () => {
     return (
-        <footer className="bg-blue-900 text-white px-6 pt-10 pb-6 min-w-sm">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+        <footer className="bg-secondary text-text px-6 pt-10 pb-6 min-w-sm">
+            <div className="max-w-11/12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
                 {/* Logo & Mission */}
                 <div className="space-y-2">
                     <Link to="/" className="inline-flex items-center space-x-2">
@@ -23,10 +23,10 @@ const Footer = () => {
                 <div className="ml-0 md:ml-6">
                     <h3 className="font-bold text-2xl mb-2">Navigation</h3>
                     <ul className="space-y-1">
-                        <li><Link to="/" className="hover:text-yellow-300">Home</Link></li>
-                        <li><Link to="/donations" className="hover:text-yellow-300">All Donations</Link></li>
-                        <li><Link to="/dashboard" className="hover:text-yellow-300">Dashboard</Link></li>
-                        <li><Link to="/login" className="hover:text-yellow-300">Login</Link></li>
+                        <li><Link to="/" className="hover:text-primary">Home</Link></li>
+                        <li><Link to="/donations" className="hover:text-primary">All Donations</Link></li>
+                        <li><Link to="/about" className="hover:text-primary">About</Link></li>
+                        <li><Link to="/login" className="hover:text-primary">Login</Link></li>
                     </ul>
                 </div>
 
@@ -34,24 +34,25 @@ const Footer = () => {
                 <div>
                     <h3 className="font-bold text-2xl mb-2">Contact</h3>
                     <ul className="text-sm space-y-1">
-                        <li>Email: nainurrahman70@gmail.com</li>
-                        <li>Phone: +8801609223632</li>
-                        <li>Location: Dhaka, Bangladesh</li>
+                        <li >Email: <span className="hover:text-primary">naimur.durjoy.dev@gmail.com</span></li>
+                        <li >Phone: <span className="hover:text-primary">+8801609223632</span></li>
+                        <li >Website: <span className="hover:text-primary"><a href="https://naimur-rahman-04.web.app/">Plateshare Dev</a></span> </li>
+                        <li >Location: <span className="hover:text-primary"> Dhaka, Bangladesh</span></li>
                     </ul>
                 </div>
 
                 {/* Social Links */}
-                <div >
+                <div className="flex flex-col items-baseline md:items-center">
                     <h3 className="font-bold text-2xl mb-2">Follow Us</h3>
                     <div className="flex space-x-4 text-xl ">
-                        <a href="https://www.facebook.com/durjoy4004/" aria-label="Facebook" className="hover:text-yellow-300"><FaFacebookF /></a>
-                        <a href="https://github.com/rahmandurjoy04" aria-label="GitHub" className="hover:text-yellow-300"><FaGithub /></a>
-                        <a href="http://linkedin.com/in/durjoy4004/" aria-label="LinkedIn" className="hover:text-yellow-300"><FaLinkedinIn /></a>
+                        <a href="https://www.facebook.com/durjoy4004/" aria-label="Facebook" className="hover:text-primary"><FaFacebookF /></a>
+                        <a href="https://github.com/rahmandurjoy04" aria-label="GitHub" className="hover:text-primary"><FaGithub /></a>
+                        <a href="http://linkedin.com/in/durjoy4004/" aria-label="LinkedIn" className="hover:text-primary"><FaLinkedinIn /></a>
                     </div>
                 </div>
             </div>
 
-            <div className="border-t border-blue-700 mt-10 pt-4 text-center text-sm">
+            <div className="border-t mt-10 pt-4 text-center text-sm">
                 &copy; {new Date().getFullYear()} PlateShare. All rights reserved.
             </div>
         </footer>

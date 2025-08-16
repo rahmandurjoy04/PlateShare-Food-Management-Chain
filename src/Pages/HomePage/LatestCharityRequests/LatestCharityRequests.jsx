@@ -15,7 +15,6 @@ const LatestCharityRequests = () => {
 
   const latestThree = charityRequests
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 3);
 
   if (isLoading) {
     return (
@@ -26,16 +25,16 @@ const LatestCharityRequests = () => {
   }
 
   return (
-    <div className="bg-blue-50 px-6 py-15 min-w-sm">
-      <h2 className="text-4xl justify-center font-bold text-blue-900 mb-10 flex items-center gap-2">
+    <div className="py-5 min-w-sm">
+      <h2 className="text-4xl justify-center font-bold text-text mb-10 flex items-center gap-2">
          Latest Charity Requests
       </h2>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mx-auto">
         {latestThree.map((request) => (
           <div
             key={request._id}
-            className=" rounded-xl p-4 shadow-sm hover:shadow-lg transform hover:scale-[1.01] transition duration-200 bg-gray-50"
+            className=" rounded-xl p-4 shadow-md hover:shadow-lg transform hover:scale-[1.01] transition duration-200 bg-gray-50"
           >
             <div className="flex items-center gap-4 mb-4">
               <img

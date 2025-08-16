@@ -34,6 +34,7 @@ import ResturantRoute from "./Routes/ResturantRoute";
 import CharityRoute from "./Routes/CharityRoute";
 import TransactionRoute from "./Routes/TransactionRoute";
 import UserRoute from "./Routes/UserRoute";
+import About from "./Pages/About";
 
 
 export const router = createBrowserRouter([
@@ -49,16 +50,23 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/donations',
-                element: <PrivateRoute>
+                element:
                     <AllDonations></AllDonations>
-                </PrivateRoute>
+               
+            }
+            ,
+            {
+                path: '/about',
+                element:
+                    <About></About>
+               
             }
             ,
             {
                 path: '/donation/:id',
-                element: <PrivateRoute>
+                element:
                     <DonationDetails></DonationDetails>
-                </PrivateRoute>
+            
             }
         ]
     },
