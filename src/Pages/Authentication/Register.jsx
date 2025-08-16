@@ -92,9 +92,10 @@ const Register = () => {
     };
 
     return (
-        <div className="p-6 md:p-12 min-w-sm mx-auto">
+        <div className="p-6 md:p-12 min-w-sm bg-accent rounded-xl mx-auto">
+            <Link to={'/'} className='relative hidden md:block -top-25 -left-25 text-xl text-center p-1 w-10 h-10 rounded-full bg-primary text-white'>x</Link>
             <form onSubmit={handleSubmit(onSubmit)} className="p-0">
-                <div className="flex flex-col items-center text-blue-900">
+                <div className="flex flex-col items-center text-text">
                     <h1 className="text-3xl font-bold mb-3">Create An Account In</h1>
                     <PlateShareLogo />
                 </div>
@@ -163,7 +164,7 @@ const Register = () => {
                 {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
 
                 {/* Submit */}
-                <button type="submit" className="btn btn-neutral mt-6 w-full">
+                <button type="submit" className="btn bg-primary text-white hover:bg-primary/70 border-none mt-6 w-full">
                     Register
                 </button>
 
@@ -180,6 +181,8 @@ const Register = () => {
             <div className="mt-6">
                 <SocialLogin />
             </div>
+            <Link to={'/'} className='btn mt-8 w-full bg-primary md:hidden border-none hover:bg-primary/70 text-white'>Back to Home</Link>
+
         </div>
     );
 };

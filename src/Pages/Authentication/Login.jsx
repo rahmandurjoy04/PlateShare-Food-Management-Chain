@@ -49,10 +49,12 @@ const Login = () => {
 
 
     return (
-        <div className='p-6'>
+        <div className='p-10 bg-accent min-w-sm rounded-xl'>
+            <Link to={'/'} className='relative hidden md:block -top-20 -left-20 text-xl text-center p-1 w-10 h-10 rounded-full bg-primary text-white'>x</Link>
+
             <form onSubmit={handleSubmit(onSubmit)} >
                 <fieldset className="fieldset text-xl rounded-box w-full p-4">
-                    <div className='flex flex-col justify-center items-center text-blue-900'>
+                    <div className='flex flex-col justify-center items-center text-text'>
                         <h1 className='text-3xl font-bold mb-3'>Welcome to</h1>
                         <PlateShareLogo />
                     </div>
@@ -85,7 +87,7 @@ const Login = () => {
                         <p className="text-red-500 text-md text-center mt-1">{errors.password.message}</p>
                     )}
 
-                    <button type="submit" className="btn btn-neutral mt-6 w-full">
+                    <button type="submit" className="btn bg-primary text-white hover:bg-primary/70 border-none mt-6 w-full">
                         Login
                     </button>
 
@@ -99,6 +101,7 @@ const Login = () => {
             </form>
 
             <SocialLogin />
+            <Link to={'/'} className='btn mt-8 w-full bg-primary md:hidden border-none hover:bg-primary/70 text-white'>Back to Home</Link>
         </div>
     );
 };

@@ -57,76 +57,78 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar shadow-sm px-4 py-0 bg-blue-900 min-w-sm">
-      {/* Left (Logo + Mobile Menu) */}
-      <div className="navbar-start">
-        {/* Mobile Menu */}
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <div className="bg-secondary  sticky top-0 z-10 min-w-sm">
+      <div className="navbar max-w-11/12 mx-auto px-0 ">
+        {/* Left (Logo + Mobile Menu) */}
+        <div className="navbar-start">
+          {/* Mobile Menu */}
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost p-0 lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-text"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-secondary text-text rounded-box w-52"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+              {navLinks}
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-950 text-amber-50 rounded-box w-52"
-          >
-            {navLinks}
-          </ul>
+
+          {/* Logo */}
+          <Link to="/">
+            <PlateShareLogo />
+          </Link>
         </div>
 
-        {/* Logo */}
-        <Link to="/">
-          <PlateShareLogo />
-        </Link>
-      </div>
+        {/* Center (Links for lg+) */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1 text-text text-lg">{navLinks}</ul>
+        </div>
 
-      {/* Center (Links for lg+) */}
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-white">{navLinks}</ul>
-      </div>
+        {/* Right (User Info or Login Button) */}
+        <div className="navbar-end  gap-2">
+          {
+            authLoading ?
+              (<span className="loading loading-dots text-text loading-xl"></span>)
+              :
+              user ?
+                (
+                  <>
+                    <div className="text-white hidden md:flex items-center gap-2">
+                      <span>{user.displayName || user.email}</span>
+                      {user.photoURL && (
+                        <img
+                          src={user?.photoURL}
+                          alt="User"
+                          referrerPolicy="no-referrer"
+                          className="w-9 h-9 rounded-full border border-white"
+                        />
+                      )}
+                    </div>
+                    <button onClick={signOut} className="btn text-white font-bold border-none hover:bg-primary/70 bg-primary">
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link to="/login" className="btn border-none bg-primary hover:bg-primary/70 text-white">
+                    Login
+                  </Link>
+                )}
 
-      {/* Right (User Info or Login Button) */}
-      <div className="navbar-end  gap-2">
-        {
-          authLoading ?
-            (<span className="loading loading-dots text-white loading-xl"></span>)
-             :
-            user ?
-              (
-                <>
-                  <div className="text-white hidden md:flex items-center gap-2">
-                    <span>{user.displayName || user.email}</span>
-                    {user.photoURL && (
-                      <img
-                        src={user?.photoURL}
-                        alt="User"
-                        referrerPolicy="no-referrer"
-                        className="w-9 h-9 rounded-full border border-white"
-                      />
-                    )}
-                  </div>
-                  <button onClick={signOut} className="btn btn-outline text-white bg-[#1e3a8a]">
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <Link to="/login" className="btn btn-outline bg-[#1e3a8a] text-white">
-                  Login
-                </Link>
-              )}
-
+        </div>
       </div>
     </div>
   );

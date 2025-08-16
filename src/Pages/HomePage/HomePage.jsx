@@ -7,12 +7,14 @@ import LatestCharityRequests from './LatestCharityRequests/LatestCharityRequests
 
 const HomePage = () => {
     return (
-        <div className='mx-auto'>
+        <div className=''>
             <Banner></Banner>
-            <FeaturedDonations></FeaturedDonations>
-            <LatestCharityRequests></LatestCharityRequests>
-            <ImpactStats></ImpactStats>
-            <CommunityStories></CommunityStories>
+            <div className='max-w-11/12 mx-auto'>
+                <FeaturedDonations></FeaturedDonations>
+                <LatestCharityRequests></LatestCharityRequests>
+                <ImpactStats></ImpactStats>
+                <CommunityStories></CommunityStories>
+            </div>
         </div>
     );
 };

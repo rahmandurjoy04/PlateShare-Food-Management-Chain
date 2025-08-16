@@ -85,7 +85,7 @@ const SocialLogin = () => {
       <div className="divider">or</div>
       <button
         onClick={handleGoogleSignin}
-        className="btn btn-lg bg-white w-full text-black"
+        className="btn btn-lg bg-primary hover:bg-primary/70 w-full border-none text-white"
       >
         <svg
           aria-label="Google logo"
