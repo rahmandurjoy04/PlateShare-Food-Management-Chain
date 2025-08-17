@@ -153,11 +153,11 @@ const stories = [
 
 const CommunityStories = () => {
     return (
-        <section className="bg-blue-50 py-14 px-4 md:px-10 min-w-sm">
-            <h2 className="text-3xl text-center md:text-4xl font-bold text-blue-900 mb-4">
+        <section className="py-10 min-w-sm">
+            <h2 className="text-3xl text-center md:text-4xl font-bold text-txt mb-4">
                 Community Stories
             </h2>
-            <p className="text-blue-700 text-center mb-10 text-sm md:text-base max-w-xl mx-auto">
+            <p className="text-text text-center mb-10 text-sm md:text-base">
                 <Typewriter
                     words={['Hear from the people making a difference—how PlateShare is helping charities, restaurants, and communities come together to fight food waste.']}
                     loop={0}
@@ -168,7 +168,7 @@ const CommunityStories = () => {
                     delaySpeed={10000}
                 />
             </p>
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-8">
+            <div className="flex flex-col md:flex-row items-start gap-8">
                 {/* Image on the Left */}
                 <div className="w-full md:w-1/2 flex flex-col py-6 justify-center items-center">
                     <h1 className='text-4xl text-teal-600 text-center font-bold'>

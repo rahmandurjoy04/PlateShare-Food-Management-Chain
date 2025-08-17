@@ -25,7 +25,7 @@ const LatestCharityRequests = () => {
   }
 
   return (
-    <div className="py-5 min-w-sm">
+    <div className="pb-10 min-w-sm">
       <h2 className="text-4xl justify-center font-bold text-text mb-10 flex items-center gap-2">
          Latest Charity Requests
       </h2>
@@ -34,7 +34,7 @@ const LatestCharityRequests = () => {
         {latestThree.map((request) => (
           <div
             key={request._id}
-            className=" rounded-xl p-4 shadow-md hover:shadow-lg transform hover:scale-[1.01] transition duration-200 bg-gray-50"
+            className=" rounded-xl p-4 shadow-md hover:shadow-lg transform hover:scale-[1.01] transition duration-200 bg-white hover:shadow-secondary "
           >
             <div className="flex items-center gap-4 mb-4">
               <img

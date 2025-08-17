@@ -19,7 +19,7 @@ const About = () => {
 
       {/* Info Grid */}
       <section className="grid md:grid-cols-3 gap-8 text-center">
-        <article className="bg-white shadow-md p-6 rounded-2xl hover:shadow-xl transition">
+        <article className="bg-white shadow-md p-6 rounded-2xl hover:shadow-xl transition hover:shadow-secondary">
           <h2 className="text-xl font-bold mb-3 text-blue-600">Our Mission</h2>
           <p className="text-gray-600">
             To reduce food waste and support communities by redistributing
@@ -28,7 +28,7 @@ const About = () => {
           </p>
         </article>
 
-        <article className="bg-white shadow-md p-6 rounded-2xl hover:shadow-xl transition">
+        <article className="bg-white shadow-md p-6 rounded-2xl hover:shadow-xl transition hover:shadow-secondary">
           <h2 className="text-xl font-bold mb-3 text-green-600">How It Works</h2>
           <p className="text-gray-600">
             Restaurants and food providers list donations on PlateShare. Charities
@@ -37,7 +37,7 @@ const About = () => {
           </p>
         </article>
 
-        <article className="bg-white shadow-md p-6 rounded-2xl hover:shadow-xl transition">
+        <article className="bg-white shadow-md p-6 rounded-2xl hover:shadow-xl transition hover:shadow-secondary">
           <h2 className="text-xl font-bold mb-3 text-orange-600">Our Values</h2>
           <p className="text-gray-600">
             Sustainability, community, and compassion guide everything we do.
@@ -48,7 +48,7 @@ const About = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="text-center mt-16">
+      <section className="text-center mt-16 ">
         <h3 className="text-2xl font-bold mb-4">Join the Movement</h3>
         <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
           Whether you're a restaurant, charity, or an individual supporter,

@@ -47,7 +47,7 @@ const FeaturedDonations = () => {
 
   return (
     <div className="py-10 bg-base-100 min-w-sm">
-      <h2 className="text-4xl font-extrabold mb-6 text-center text-text">Featured Donations</h2>
+      <h2 className="text-4xl font-extrabold mb-10 text-center text-text">Featured Donations</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {visibleDonations.length === 0 && (
@@ -57,7 +57,7 @@ const FeaturedDonations = () => {
         {visibleDonations.map(donation => (
           <div
             key={donation._id}
-            className="bg-base-100 rounded-lg shadow-md p-5 flex flex-col hover:shadow-xl transition"
+            className="bg-white rounded-lg shadow-md p-5 flex flex-col hover:shadow-xl transition hover:shadow-secondary"
           >
             <img
               src={donation.image}
@@ -66,8 +66,8 @@ const FeaturedDonations = () => {
             />
 
             <div className="mb-2">
-              <span className="font-bold text-gray-700">Food Type: </span>
-              <span className="text-gray-600">{donation.foodType}</span>
+              {/* <span className="font-bold text-gray-700">Item: </span> */}
+              <span className="text-text font-semibold">{donation.title}</span>
             </div>
 
             <div className="mb-2">
@@ -94,7 +94,7 @@ const FeaturedDonations = () => {
               onClick={() => navigate(`/donation/${donation._id}`)}
               className="mt-auto bg-primary text-white font-semibold py-2 rounded hover:bg-primary/70 transition"
             >
-              Details
+              See More
             </button>
           </div>
         ))}

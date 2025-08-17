@@ -4,6 +4,7 @@ import ImpactStats from './ImpactStats/ImpactStats';
 import CommunityStories from './CommunityStories/CommunityStories';
 import FeaturedDonations from './FeaturedDonations/FeaturedDonations';
 import LatestCharityRequests from './LatestCharityRequests/LatestCharityRequests';
+import Newsletter from '../Newsletter';
 
 const HomePage = () => {
     return (
@@ -14,6 +15,7 @@ const HomePage = () => {
                 <LatestCharityRequests></LatestCharityRequests>
                 <ImpactStats></ImpactStats>
                 <CommunityStories></CommunityStories>
+                <Newsletter></Newsletter>
             </div>
         </div>
     );

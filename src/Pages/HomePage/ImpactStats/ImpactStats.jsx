@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaUtensils, FaLeaf, FaRecycle } from 'react-icons/fa';
+import { FaUtensils, FaLeaf, FaRecycle, FaHandsHelping } from 'react-icons/fa';
 import { Typewriter } from 'react-simple-typewriter';
 
 const ImpactStats = () => {
@@ -46,62 +46,73 @@ const ImpactStats = () => {
     }, []);
 
     return (
-        <section className="bg-blue-100 py-10 px-4 md:px-10">
-            <div className="max-w-7xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">
+            <div className="min-w-sm">
+                <h2 className="text-3xl text-center md:text-4xl font-bold text-text mb-5">
                     Our Impact So Far
                 </h2>
-                <p className="text-blue-800 mb-10 max-w-xl mx-auto text-sm md:text-base">
+                <p className="text-text mb-10 max-w-xl mx-auto text-sm md:text-base">
                     <Typewriter
                         words={["PlateShare connects restaurants with charities to reduce food waste and fight hunger. See the difference we're making together."]}
-                                    loop = { 0}
-                                    cursor
-                                    cursorStyle = "|"
-                                    typeSpeed = { 80}
-                                    deleteSpeed = { 50}
-                                    delaySpeed = { 10000}
-                            />
-        </p>
+                        loop={0}
+                        cursor
+                        cursorStyle="|"
+                        typeSpeed={80}
+                        deleteSpeed={50}
+                        delaySpeed={10000}
+                    />
+                </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 min-w-sm sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Meals Donated */}
-                    <div className="group card bg-white shadow-lg p-6 rounded-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-blue-200">
+                    <div className="group card bg-white shadow-lg p-6 rounded-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-secondary">
                         <FaUtensils className="text-4xl text-amber-600 mb-4 transition-colors duration-300 group-hover:text-yellow-700" />
                         <h3 className="text-3xl font-extrabold text-blue-900">
                             {stats.mealsDonated.toLocaleString()}+
                         </h3>
-                        <p className="text-blue-700 font-semibold">Meals Donated</p>
-                        <p className="text-blue-800 text-sm mt-2 text-center">
+                        <p className="text-primary font-semibold my-2">Meals Donated</p>
+                        <p className="text-text text-sm text-center">
                             Providing nutritious meals to communities in need.
                         </p>
                     </div>
 
                     {/* Food Saved */}
-                    <div className="group card bg-white shadow-lg p-6 rounded-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-blue-200">
+                    <div className="group card bg-white shadow-lg p-6 rounded-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-secondary">
                         <FaLeaf className="text-4xl text-green-600 mb-4 transition-colors duration-300 group-hover:text-green-800" />
                         <h3 className="text-3xl font-extrabold text-blue-900">
                             {stats.foodSaved.toLocaleString()} kg
                         </h3>
-                        <p className="text-blue-700 font-semibold">Food Saved</p>
-                        <p className="text-blue-800 text-sm mt-2 text-center">
+                        <p className="text-primary font-semibold my-2">Food Saved</p>
+                        <p className="text-text text-sm  text-center">
                             Rescuing surplus food from restaurants for redistribution.
                         </p>
                     </div>
 
                     {/* CO2 Prevented */}
-                    <div className="group card bg-white shadow-lg p-6 rounded-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-blue-200 md:col-span-2 md:col-start-1 md:mx-auto lg:col-span-1 lg:col-start-auto">
+                    <div className="group card bg-white shadow-lg p-6 rounded-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-secondary">
                         <FaRecycle className="text-4xl text-cyan-600 mb-4 transition-colors duration-300 group-hover:text-teal-700" />
                         <h3 className="text-3xl font-extrabold text-blue-900">
                             {(stats.co2Prevented / 1000).toFixed(1)} tons
                         </h3>
-                        <p className="text-blue-700 font-semibold">CO₂ Prevented</p>
-                        <p className="text-blue-800 text-sm mt-2 text-center">
+                        <p className="text-primary font-semibold my-2">CO₂ Prevented</p>
+                        <p className="text-text text-sm text-center">
                             Reducing carbon emissions through sustainable practices.
                         </p>
                     </div>
+
+                    {/* Volunteers Engaged */}
+                    <div className="group card bg-white shadow-lg p-6 rounded-lg flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-secondary">
+                        <FaHandsHelping className="text-4xl text-purple-600 mb-4 transition-colors duration-300 group-hover:text-purple-800" />
+                        <h3 className="text-3xl font-extrabold text-blue-900">
+                            1,200+
+                        </h3>
+                        <p className="text-primary font-semibold my-2">Volunteers Engaged</p>
+                        <p className="text-text text-sm text-center">
+                            Dedicated individuals helping distribute food and support communities.
+                        </p>
+                    </div>
+
                 </div>
             </div>
-        </section>
     );
 };
 
