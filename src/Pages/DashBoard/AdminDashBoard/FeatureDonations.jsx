@@ -40,7 +40,7 @@ const FeatureDonations = () => {
 
       <div className="overflow-x-auto bg-white rounded-lg shadow">
         <table className="table w-full">
-          <thead className="bg-blue-900 text-white">
+          <thead className="bg-primary text-black">
             <tr>
               <th>Image</th>
               <th>Title</th>
