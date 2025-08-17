@@ -214,7 +214,7 @@ const DashboardLayout = () => {
                     {/* Charity Links */}
                     {!roleLoading && role === 'charity' && (
                         <>
-                            <li className="menu-title text-sm text-white/60 mt-2 mb-1">Charity Dashboard</li>
+                            <li className="menu-title text-sm text-text mt-2 mb-1">Charity Dashboard</li>
 
                             <li>
                                 <NavLink to="/dashboard/profile">
