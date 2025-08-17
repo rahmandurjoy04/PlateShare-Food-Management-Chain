@@ -3,6 +3,8 @@ import { Link, NavLink, Outlet } from 'react-router';
 import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaUserCheck, FaUserShield, FaTasks, FaStar, FaUsersCog, FaClipboardCheck, FaClipboardList, FaTruck, FaUserCog, FaChartBar, FaListAlt, FaUtensils } from 'react-icons/fa';
 import PlateShareLogo from '../Shared/PlateShareLogo/PlateShareLogo';
 import useGetUserRole from '../hoooks/useGetUserRole';
+import { ImStatsDots } from "react-icons/im";
+
 
 const DashboardLayout = () => {
 
@@ -15,14 +17,14 @@ const DashboardLayout = () => {
             <div className="drawer-content flex flex-col">
 
                 {/* Navbar */}
-                <div className="navbar bg-blue-900 w-full min-w-sm lg:hidden">
+                <div className="navbar bg-secondary  lg:hidden">
                     <div className="flex-none ">
-                        <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
+                        <label htmlFor="my-drawer-2" aria-label="open sidebar" type="checkbox"  className="btn btn-square btn-ghost">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                className="inline-block h-6 w-6 stroke-current text-white"
+                                className="inline-block h-6 w-6 stroke-current text-black"
                             >
                                 <path
                                     strokeLinecap="round"
@@ -33,7 +35,7 @@ const DashboardLayout = () => {
                             </svg>
                         </label>
                     </div>
-                    <div className="mx-2 min-w-sm flex-1 px-2 lg:hidden text-white text-xl">Dashboard</div>
+                    <div className="mx-2 min-w-sm flex-1 px-2 lg:hidden text-black text-xl">Dashboard</div>
 
                 </div>
                 {/* Page content here */}
@@ -41,17 +43,23 @@ const DashboardLayout = () => {
                 {/* Page content here */}
 
             </div>
-            <div className="drawer-side">
+            <div className="drawer-side text-black">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu min-h-full w-80 p-4 bg-blue-900 text-white">
+                <ul className="menu min-h-full w-80 p-4 bg-secondary">
                     {/* Sidebar content here */}
                     <Link to={'/'}>
                         <PlateShareLogo></PlateShareLogo>
                     </Link>
                     <li>
-                        <Link to="/dashboard">
+                        <Link to="/" >
                             <FaHome className="inline-block mr-2" />
                             Home
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/dashboard">
+                            <ImStatsDots className="inline-block mr-2" />
+                            Stats
                         </Link>
                     </li>
 
@@ -67,7 +75,7 @@ const DashboardLayout = () => {
                     {/* User Links */}
                     {!roleLoading && role === 'user' && (
                         <>
-                            <li className="menu-title text-sm text-white/60 mt-4 mb-1">User Dashboard</li>
+                            <li className="menu-title text-sm text-text mt-4 mb-1">User Dashboard</li>
 
                             <li>
                                 <NavLink to="/dashboard/profile" className={({ isActive }) => isActive ? 'active' : ''}>
@@ -111,11 +119,11 @@ const DashboardLayout = () => {
                     {/* admin links */}
                     {!roleLoading && role === 'admin' && (
                         <>
-                            <li className="menu-title text-sm text-white/60 mt-2 mb-1">Admin Controls</li>
+                            <li className="menu-title text-sm text-text mt-2 mb-1">Admin Controls</li>
 
                             <li>
                                 <NavLink to="/dashboard/profile" className={({ isActive }) => isActive ? 'active' : ''}>
-                                    <FaUserEdit className="inline-block mr-2" />
+                                    <FaUserEdit className="inline-block mr-2 " />
                                     My Profile
                                 </NavLink>
                             </li>
@@ -160,7 +168,7 @@ const DashboardLayout = () => {
                     {/* Resturant Links */}
                     {!roleLoading && role === 'restaurant' && (
                         <>
-                            <li className="menu-title text-sm text-white/60 mt-2 mb-1">Restaurant Controls</li>
+                            <li className="menu-title text-sm text-text mt-2 mb-1">Restaurant Controls</li>
                             <li>
                                 <NavLink to="/dashboard/profile" className={({ isActive }) => isActive ? 'active' : ''}>
                                     <FaUserEdit className="inline-block mr-2" />

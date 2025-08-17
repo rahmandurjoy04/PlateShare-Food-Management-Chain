@@ -16,9 +16,6 @@ const Newsletter = () => {
         try {
             const res = await axios.post(`newsletter/subscribe?email=${email}`)
 
-            // const data = await res.json();
-            console.log(res);
-
             if (res.statusText==='OK') {
                 setMessage("🎉 Subscription successful! Check your inbox.");
                 setEmail("");
@@ -35,7 +32,7 @@ const Newsletter = () => {
 
     return (
         <div className="py-5 min-w-sm ">
-            <h1 className="text-center text-4xl text-text font-bold mb-10">Newsletter</h1>
+            <h1 className="text-center text-4xl text-text font-extrabold mb-10">Newsletter</h1>
             <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center min-w-sm">
                 {/* Left side - Image */}
                 <div className="flex justify-center h-auto md:h-[350px] min-w-sm">
@@ -63,14 +60,14 @@ const Newsletter = () => {
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            className="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary"
                         />
                         <button
                             type="submit"
                             disabled={loading}
                             className={`px-6 py-3 rounded-xl font-semibold shadow transition ${loading
                                 ? "bg-gray-400 cursor-not-allowed text-white"
-                                : "bg-green-600 text-white hover:bg-green-700"
+                                : "bg-primary text-white hover:bg-primary/70"
                                 }`}
                         >
                             {loading ? "Sending..." : "Subscribe"}

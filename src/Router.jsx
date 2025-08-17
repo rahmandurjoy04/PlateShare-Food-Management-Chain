@@ -35,6 +35,7 @@ import CharityRoute from "./Routes/CharityRoute";
 import TransactionRoute from "./Routes/TransactionRoute";
 import UserRoute from "./Routes/UserRoute";
 import About from "./Pages/About";
+import Partners from "./Partners/Partners";
 
 
 export const router = createBrowserRouter([
@@ -66,6 +67,15 @@ export const router = createBrowserRouter([
                 path: '/donation/:id',
                 element:
                     <DonationDetails></DonationDetails>
+            
+            }
+            ,
+            {
+                path: '/partners',
+                element:
+                    <PrivateRoute>
+                        <Partners></Partners>
+                    </PrivateRoute>
             
             }
         ]

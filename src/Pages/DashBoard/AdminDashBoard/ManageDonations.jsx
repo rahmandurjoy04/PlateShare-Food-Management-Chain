@@ -39,7 +39,7 @@ const ManageDonations = () => {
       <h2 className="text-3xl font-bold text-center mb-6">Manage Donations</h2>
       <div className="overflow-x-auto bg-white rounded-lg shadow-md">
         <table className="table w-full">
-          <thead className="bg-blue-900 text-white">
+          <thead className="bg-primary text-white">
             <tr>
               <th>Title</th>
               <th>Food Type</th>

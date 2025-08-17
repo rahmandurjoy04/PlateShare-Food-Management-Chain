@@ -154,7 +154,7 @@ const stories = [
 const CommunityStories = () => {
     return (
         <section className="py-10 min-w-sm">
-            <h2 className="text-3xl text-center md:text-4xl font-bold text-txt mb-4">
+            <h2 className="text-3xl text-center md:text-4xl font-extrabold text-txt mb-4">
                 Community Stories
             </h2>
             <p className="text-text text-center mb-10 text-sm md:text-base">

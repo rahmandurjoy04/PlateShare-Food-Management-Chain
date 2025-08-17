@@ -121,14 +121,14 @@ const ManageUsers = () => {
 
     return (
         <div className="p-6 md:p-12 min-w-sm mx-auto">
-            <h1 className="text-3xl font-bold text-blue-900 mb-6 text-center">Manage Users</h1>
+            <h1 className="text-3xl font-bold text-primary mb-6 text-center">Manage Users</h1>
             {users.length === 0 ? (
                 <p className="text-gray-600 text-center">No users found.</p>
             ) : (
                 <div className="overflow-x-auto border border-gray-300 rounded-lg shadow-md">
   <table className="table table-zebra table-compact min-w-sm w-full border-collapse border border-gray-300">
     {/* Table Head */}
-    <thead className="bg-blue-300 text-black">
+    <thead className="bg-primary text-white">
       <tr>
         <th className="border border-gray-300">#</th>
         <th className="border border-gray-300">User Name</th>
@@ -158,14 +158,14 @@ const ManageUsers = () => {
                 Make Admin
               </button>
               <button
-                className="btn btn-sm btn-secondary btn-outline"
+                className="btn btn-sm btn-secondary bg-primary/70 hover:bg-primary/50 text-black btn-outline"
                 onClick={() => handleMakeRestaurant(user._id)}
                 disabled={user.role === 'restaurant'}
               >
                 Make Restaurant
               </button>
               <button
-                className="btn btn-sm btn-accent btn-outline"
+                className="btn btn-sm  btn-outline"
                 onClick={() => handleMakeCharity(user._id)}
                 disabled={user.role === 'charity'}
               >

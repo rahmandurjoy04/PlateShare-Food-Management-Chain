@@ -90,9 +90,9 @@ const ManageRequests = () => {
                                     <td>{req.charityName}</td>
                                     <td>{req.charityEmail}</td>
                                     <td>{req.pickupTime}</td>
-                                    <td>
-                                        <span className={`badge ${req.status === 'Pending' ? 'badge-warning' : 'badge-success'}`}>
-                                            {req.status}
+                                    <td >
+                                        <span className={` ${req.status === 'Pending' ? 'badge-warning' : 'badge-success'} btn bg-secondary rounded-xl text-xs py-1`}>
+                                            {req.status.split(' ')[0]}
                                         </span>
                                     </td>
                                     <td>

@@ -26,7 +26,7 @@ const LatestCharityRequests = () => {
 
   return (
     <div className="pb-10 min-w-sm">
-      <h2 className="text-4xl justify-center font-bold text-text mb-10 flex items-center gap-2">
+      <h2 className="text-4xl justify-center font-extrabold text-text mb-10 flex items-center gap-2">
          Latest Charity Requests
       </h2>
 

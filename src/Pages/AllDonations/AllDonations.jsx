@@ -56,11 +56,11 @@ const AllDonations = () => {
   }
 
   return (
-    <div className="min-w-sm max-w-7xl mx-auto p-6">
-      <h2 className="text-4xl font-extrabold text-center mb-6 text-blue-800 drop-shadow-sm">🍱 All Donations</h2>
+    <div className="min-w-sm max-w-11/12 mx-auto">
+      <h2 className="text-4xl font-extrabold text-center my-5 text-primary ">🍱 All Donations</h2>
 
       {/* Search & Sort Controls */}
-      <div className="mb-8 flex flex-col md:flex-row gap-4 justify-center items-center">
+      <div className="mb-6 flex flex-col md:flex-row gap-4 justify-center items-center">
         <input
           type="text"
           placeholder="Search by city..."
@@ -69,7 +69,7 @@ const AllDonations = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <select
-          className="select select-bordered select-primary w-full max-w-xs"
+          className="select select-bordered select-primary w-full max-w-md"
           value={sortType}
           onChange={(e) => setSortType(e.target.value)}
         >
@@ -82,7 +82,7 @@ const AllDonations = () => {
       </div>
 
       {/* Donations Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
         {filteredDonations.length > 0 ? (
           filteredDonations.map((donation) => (
             <div
@@ -96,26 +96,24 @@ const AllDonations = () => {
               />
               <div className="p-5 flex-grow flex flex-col justify-between">
                 <div className="space-y-2">
-                  <h3 className="text-3xl font-bold text-blue-800">{donation.title}</h3>
+                  <h3 className="text-2xl font-bold text-text">{donation.title}</h3>
+                  
                   <p className="text-sm text-gray-600">
-                    <strong className="text-blue-700 text-lg">Restaurant:</strong> {donation.restaurantName}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    <strong className="text-blue-700 text-lg">Location:</strong> {donation.location}
+                    <strong className="text-primary text-lg">Location:</strong> {donation.location}
                   </p>
                   {donation.charityName && (
-                    <p className="text-sm text-gray-600">
-                      <strong className="text-blue-700 text-lg">Charity Assigned:</strong> {donation.charityName}
+                    <p className="text-sm text-text">
+                      <strong className="text-primary text-lg">Charity Assigned:</strong> {donation.charityName}
                     </p>
                   )}
-                  <p className="text-sm text-gray-600">
-                    <strong className="text-blue-700 text-lg">Quantity:</strong> {donation.quantity}
+                  <p className="text-sm text-text">
+                    <strong className="text-primary text-lg">Quantity:</strong> {donation.quantity}
                   </p>
-                  <p className="text-sm text-gray-600">
-                    <strong className="text-blue-700 text-lg">Pickup Time:</strong> {donation.pickupTime}
+                  <p className="text-sm text-text">
+                    <strong className="text-primary text-lg">Pickup Time:</strong> {donation.pickupTime}
                   </p>
                   <p className="">
-                    <strong className="text-blue-700 text-xl mr-3">Status:</strong>
+                    <strong className="text-primary text-xl mr-3">Status:</strong>
                     <span
                       className={`inline-block text-xs px-4 py-1 rounded-full font-semibold uppercase tracking-wide bg-green-100 text-green-800 border border-green-300`}
                     >
@@ -126,7 +124,7 @@ const AllDonations = () => {
                 <div className="mt-5">
                   <Link
                     to={`/donation/${donation._id}`}
-                    className="block w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold px-5 py-2 text-center rounded-lg transition-all"
+                    className="block w-full bg-primary hover:bg-primary/70 text-white font-semibold px-5 py-2 text-center rounded-lg transition-all"
                   >
                     View Details
                   </Link>

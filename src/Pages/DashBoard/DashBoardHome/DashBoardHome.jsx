@@ -35,38 +35,38 @@ const DashBoardHome = () => {
   }
 
   return (
-    <section className="py-12 bg-base-200">
+    <section className="py-12 bg-base-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-extrabold text-blue-900 text-center mb-12 bg-gradient-to-r from-primary to-secondary  bg-clip-text">All Donation Statistics</h2>
+        <h2 className="text-4xl font-extrabold text-primary text-center mb-12 bg-gradient-to-r from-primary to-secondary  bg-clip-text">All Donation Statistics</h2>
         <div className="mb-12">
-          <h3 className="text-2xl font-semibold text-blue-800 mb-6 text-center">Total Statistics Overview</h3>
+          <h3 className="text-2xl font-semibold text-primary/70 mb-6 text-center">Total Statistics Overview</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-l-4 border-primary">
+            <div className="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-l-4 border-primary">
               <div className="card-body">
                 <h4 className="card-title text-lg text-base-content">Total Quantity</h4>
                 <p className="text-3xl font-bold text-primary">{stats.totalStats.totalQuantityAll || 0} Portions</p>
                 <span className="text-sm text-base-content/70">Donated across all categories</span>
               </div>
             </div>
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-l-4 border-success">
+            <div className="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-l-4 border-success">
               <div className="card-body">
                 <h4 className="card-title text-lg text-base-content">Total Donations</h4>
                 <p className="text-3xl font-bold text-success">{stats.totalStats.totalDonations || 0}</p>
                 <span className="text-sm text-base-content/70">Number of donations made</span>
               </div>
             </div>
-            <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-l-4 border-accent">
+            <div className="card bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-l-4 border-accent">
               <div className="card-body">
-                <h4 className="card-title text-lg text-base-content">Unique Restaurants</h4>
-                <p className="text-3xl font-bold text-accent">{stats.totalStats.uniqueRestaurantsCount || 0}</p>
+                <h4 className="card-title text-lg ">Unique Restaurants</h4>
+                <p className="text-3xl font-bold text-primary">{stats.totalStats.uniqueRestaurantsCount || 0}</p>
                 <span className="text-sm text-base-content/70">Active contributors</span>
               </div>
             </div>
           </div>
         </div>
         <div className="mb-12">
-          <h3 className="text-2xl font-semibold text-blue-800 mb-6 text-center">Visualization</h3>
-          <div className="card bg-base-100 shadow-md p-6 h-[600px]">
+          <h3 className="text-2xl font-semibold text-primary mb-6 text-center">Charts</h3>
+          <div className="card bg-white shadow-md p-6 h-[600px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -91,12 +91,12 @@ const DashBoardHome = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-2xl font-semibold text-blue-800 mb-6 text-center">Detailed View by Category</h3>
+          <h3 className="text-2xl font-semibold text-primary mb-6 text-center">Detailed View by Category</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {stats.byFoodType.map((stat, index) => (
               <div
                 key={index}
-                className="card bg-base-100 shadow-md hover:bg-base-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-l-4 border-info"
+                className="card bg-white shadow-md hover:bg-base-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-l-4 border-info"
               >
                 <div className="card-body">
                   <h4 className="card-title text-lg text-base-content">{stat.foodType}</h4>

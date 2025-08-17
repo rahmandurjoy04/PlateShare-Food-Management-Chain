@@ -47,7 +47,7 @@ const ImpactStats = () => {
 
     return (
             <div className="min-w-sm">
-                <h2 className="text-3xl text-center md:text-4xl font-bold text-text mb-5">
+                <h2 className="text-3xl text-center md:text-4xl font-extrabold text-text mb-5">
                     Our Impact So Far
                 </h2>
                 <p className="text-text mb-10 max-w-xl mx-auto text-sm md:text-base">
