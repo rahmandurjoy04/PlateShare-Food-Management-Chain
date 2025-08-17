@@ -54,8 +54,8 @@ const MyRequests = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">My Requests</h2>
+    <div className="max-w-11/12 min-w-sm w-full mx-auto py-6">
+      <h2 className="text-4xl font-bold text-center mb-8 text-primary">My Requests</h2>
 
       {loading && <LoadingSpinner></LoadingSpinner>}
 
@@ -63,10 +63,10 @@ const MyRequests = () => {
         <p className="text-center text-gray-500">You have not made any donation requests yet.</p>
       )}
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {requests.map((req) => (
-          <div key={req._id} className="bg-white rounded-lg shadow-md p-5 border border-gray-200">
-            <h3 className="text-xl font-semibold text-blue-700 mb-2 truncate">{req.donationTitle}</h3>
+          <div key={req._id} className="bg-accent/70 rounded-lg shadow-md p-5 hover:shadow-secondary">
+            <h3 className="text-xl font-extrabold text-primary mb-2 truncate">{req.donationTitle}</h3>
             <p className="text-gray-700 mb-1"><strong>Restaurant:</strong> {req.restaurantName}</p>
             <p className="text-gray-700 mb-1"><strong>Food Type:</strong> {req.foodType}</p>
             <p className="text-gray-700 mb-1"><strong>Quantity:</strong> {req.quantity}</p>

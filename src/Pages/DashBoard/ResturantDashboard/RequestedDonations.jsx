@@ -44,10 +44,10 @@ const RequestedDonations = () => {
 
   return (
     <div className='min-w-sm px-4'>
-      <h2 className="text-4xl text-blue-900 text-center font-bold m-4">Requested Donations</h2>
+      <h2 className="text-4xl text-primary text-center font-bold m-4">Requested Donations</h2>
       <div className="overflow-x-auto">
         <table className="table w-full border">
-          <thead className="bg-gray-100 text-gray-700 font-semibold">
+          <thead className="bg-primary text-black font-semibold">
             <tr>
               <th>Title</th>
               <th>Food Type</th>
@@ -61,7 +61,7 @@ const RequestedDonations = () => {
           </thead>
           <tbody>
             {requests.map((req) => (
-              <tr key={req._id} className="hover:bg-gray-50">
+              <tr key={req._id} className="hover:bg-accent">
                 <td className="font-medium">{req.donationTitle}</td>
                 <td>{req.foodType}</td>
                 <td>{req.charityName}</td>

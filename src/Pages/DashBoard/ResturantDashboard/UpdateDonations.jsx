@@ -56,7 +56,6 @@ const UpdateDonation = () => {
                     throw new Error('Image upload failed');
                 }
                 imageUrl = imgbbData?.data?.url;
-
             }
 
             const updatedDonation = {
@@ -86,75 +85,80 @@ const UpdateDonation = () => {
     if (loading) return <div className="text-center text-3xl mt-10">Loading donation data...</div>;
 
     return (
-        <div className="min-w-sm max-w-2xl mx-auto mt-10 bg-blue-200 p-10 shadow-md rounded-lg">
-            <h2 className="text-3xl text-center font-bold mb-4 text-blue-900">Update Donation</h2>
+        <div className="w-full max-w-11/12 mx-auto mt-10 bg-base-100 p-10 shadow-md rounded-lg">
+            <h2 className="text-3xl text-center font-bold mb-4 text-primary">Update Donation</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <div className="flex flex-col md:flex-row gap-4">
+                    <div className="w-full md:w-1/2 space-y-4">
+                        <div>
+                            <label className="block font-medium">Donation Title</label>
+                            <input
+                                type="text"
+                                {...register('title', { required: true })}
+                                className="w-full border rounded p-2 bg-white"
+                            />
+                            {errors.title && <p className="text-red-600 text-sm">Title is required</p>}
+                        </div>
 
-                <div>
-                    <label className="block font-medium">Donation Title</label>
-                    <input
-                        type="text"
-                        {...register('title', { required: true })}
-                        className="w-full bg-white border rounded p-2"
-                    />
-                    {errors.title && <p className="text-red-600 text-sm">Title is required</p>}
-                </div>
+                        <div>
+                            <label className="block font-medium">Food Type</label>
+                            <select
+                                {...register('foodType', { required: true })}
+                                className="w-full border rounded p-2 bg-white"
+                            >
+                                <option value="">Select Type</option>
+                                <option value="Produce">Produce</option>
+                                <option value="Bakery">Bakery</option>
+                                <option value="Dairy">Dairy</option>
+                                <option value="Prepared">Prepared</option>
+                                <option value="Others">Others</option>
+                            </select>
+                            {errors.foodType && <p className="text-red-600 text-sm">Food type is required</p>}
+                        </div>
 
-                <div>
-                    <label className="block font-medium">Food Type</label>
-                    <select
-                        {...register('foodType', { required: true })}
-                        className="w-full border rounded p-2 bg-white"
-                    >
-                        <option value="">Select Type</option>
-                        <option value="Produce">Produce</option>
-                        <option value="Bakery">Bakery</option>
-                        <option value="Dairy">Dairy</option>
-                        <option value="Prepared">Prepared</option>
-                        <option value="Others">Others</option>
-                    </select>
-                    {errors.foodType && <p className="text-red-600 text-sm">Food type is required</p>}
-                </div>
+                        <div>
+                            <label className="block font-medium">Quantity</label>
+                            <input
+                                type="text"
+                                {...register('quantity', { required: true })}
+                                className="w-full border rounded p-2 bg-white"
+                            />
+                            {errors.quantity && <p className="text-red-600 text-sm">Quantity is required</p>}
+                        </div>
+                    </div>
 
-                <div>
-                    <label className="block font-medium">Quantity</label>
-                    <input
-                        type="text"
-                        {...register('quantity', { required: true })}
-                        className="w-full border rounded p-2 bg-white"
-                    />
-                    {errors.quantity && <p className="text-red-600 text-sm">Quantity is required</p>}
-                </div>
+                    <div className="w-full md:w-1/2 space-y-4">
+                        <div>
+                            <label className="block font-medium">Pickup Time Window</label>
+                            <input
+                                type="text"
+                                {...register('pickupTime', { required: true })}
+                                className="w-full border rounded p-2 bg-white"
+                            />
+                            {errors.pickupTime && <p className="text-red-600 text-sm">Pickup time is required</p>}
+                        </div>
 
-                <div>
-                    <label className="block font-medium">Pickup Time Window</label>
-                    <input
-                        type="text"
-                        {...register('pickupTime', { required: true })}
-                        className="w-full border rounded p-2 bg-white"
-                    />
-                    {errors.pickupTime && <p className="text-red-600 text-sm">Pickup time is required</p>}
-                </div>
+                        <div>
+                            <label className="block font-medium">Location</label>
+                            <input
+                                type="text"
+                                {...register('location', { required: true })}
+                                className="w-full border rounded p-2 bg-white"
+                            />
+                            {errors.location && <p className="text-red-600 text-sm">Location is required</p>}
+                        </div>
 
-                <div>
-                    <label className="block font-medium">Location</label>
-                    <input
-                        type="text"
-                        {...register('location', { required: true })}
-                        className="w-full border rounded p-2 bg-white"
-                    />
-                    {errors.location && <p className="text-red-600 text-sm">Location is required</p>}
-                </div>
-
-                <div>
-                    <label className="block font-medium">Current Image (unchanged if no file selected)</label>
-                    <input type="hidden" {...register('imageURL')} />
-                    <input
-                        type="file"
-                        accept="image/*"
-                        {...register('image')}
-                        className="w-full border rounded p-2 bg-white"
-                    />
+                        <div>
+                            <label className="block font-medium">Upload New Image (optional)</label>
+                            <input type="hidden" {...register('imageURL')} />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                {...register('image')}
+                                className="w-full border rounded p-2 bg-white"
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 <button

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hoooks/useAuth';
 import useAxiosSecure from '../../../hoooks/useAxiosSecure';
+import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 
 const MyDonations = () => {
   const { user } = useAuth();
@@ -48,11 +49,11 @@ const MyDonations = () => {
     });
   };
 
-  if (isLoading) return <div className="text-center py-10 text-lg">Loading your donations...</div>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
   return (
     <div className=" min-w-sm px-4 py-8">
-      <h2 className="text-4xl font-bold text-blue-900 text-center mb-6">My Donations</h2>
+      <h2 className="text-4xl font-bold text-primary text-center mb-6">My Donations</h2>
       {donations.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center py-16 px-6 bg-blue-100 shadow-md rounded-xl border border-gray-200">
           

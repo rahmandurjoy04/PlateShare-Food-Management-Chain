@@ -72,8 +72,8 @@ const MyProfile = () => {
 
       if (!imageUrl) throw new Error('Image upload failed');
 
-      // ✅ Update Firebase Auth profile
-      await updateUserProfilePhoto(imageUrl);
+      //  Update Firebase Auth profile
+      updateUserProfilePhoto(imageUrl);
 
       // Update backend user photo
       await axiosSecure.patch(`users/photo?email=${user?.email}`, {

@@ -40,9 +40,9 @@ const TransactionHistory = () => {
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Transaction History</h2>
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
-          <thead className="bg-gray-100">
-            <tr className="text-sm text-gray-600">
+        <table className="table border table-zebra w-full">
+          <thead className="bg-primary">
+            <tr className="text-sm ">
               <th>#</th>
               <th>Transaction ID</th>
               <th>Amount</th>
@@ -52,7 +52,7 @@ const TransactionHistory = () => {
           </thead>
           <tbody>
             {transactions.map((txn, index) => (
-              <tr key={txn._id}>
+              <tr key={txn._id} className='hover:bg-accent'>
                 <th>{index + 1}</th>
                 <td className="text-blue-600 break-all">{txn.transactionId}</td>
                 <td>${txn.amount}</td>

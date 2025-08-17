@@ -26,8 +26,8 @@ const DonationStats = () => {
     const topFood = stats.reduce((prev, curr) => (curr.totalQuantity > (prev?.totalQuantity || 0) ? curr : prev), null);
 
     return (
-        <div className="bg-white p-6 rounded-xl  space-y-8">
-            <h2 className="text-4xl font-bold text-center text-blue-900">Your Donation Statistics</h2>
+        <div className="bg-base-100 p-6 rounded-xl  space-y-8">
+            <h2 className="text-4xl font-bold text-center text-primary">Your Donation Statistics</h2>
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -64,7 +64,7 @@ const DonationStats = () => {
                         <XAxis dataKey="foodType" />
                         <YAxis />
                         <Tooltip />
-                        <Bar dataKey="totalQuantity" fill="#4CAF50" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="totalQuantity" fill="#0097a7" radius={[4, 4, 0, 0]} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
