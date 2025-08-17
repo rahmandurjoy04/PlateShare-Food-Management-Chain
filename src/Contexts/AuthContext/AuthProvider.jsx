@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut,GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut,GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import { auth } from '../../Firebase/firebase.init';
 import axios from 'axios';
 
@@ -25,6 +25,18 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return signInWithPopup(auth,gooogleProvider)
     }
+
+    const updateUserProfilePhoto = (photoURL) => {
+    if (auth.currentUser) {
+        return updateProfile(auth.currentUser, {
+            photoURL: photoURL
+        }).then(() => {
+            // refresh state so React re-renders with new photo
+            setUser({ ...auth.currentUser });
+        });
+    }
+};
+
 
     const logoutUser = () => {
         localStorage.removeItem('token')
@@ -56,7 +68,8 @@ const AuthProvider = ({ children }) => {
         registerUser,
         loginUser,
         logoutUser,
-        googleSignIn
+        googleSignIn,
+        updateUserProfilePhoto
     };
 
     return (
