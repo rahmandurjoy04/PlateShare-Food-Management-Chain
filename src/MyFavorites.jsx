@@ -74,7 +74,7 @@ const MyFavorites = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <h2 className="text-4xl text-blue-800 font-semibold mb-6 text-center">My Favorites</h2>
+      <h2 className="text-4xl text-primary font-semibold mb-6 text-center">My Favorites</h2>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {favorites.map((fav) => (
           <div key={fav._id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
@@ -84,10 +84,11 @@ const MyFavorites = () => {
               className="h-48 w-full object-cover"
               loading="lazy"
             />
-            <div className="p-4 flex flex-col flex-grow">
+            <div className="p-4 flex flex-col text-primary flex-grow">
               <h3 className="text-lg font-bold mb-1 truncate">{fav.donationTitle}</h3>
-              <p className="text-sm text-gray-600 mb-1 truncate">
-                {fav.restaurantName} - {fav.location}
+              <p className="text-sm  mb-1 truncate">
+                <span className="font-semibold">Location:</span> 
+                {fav.location}
               </p>
               <p className="text-sm mb-1">
                 <span className="font-semibold">Status:</span> {fav.status}

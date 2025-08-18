@@ -154,7 +154,7 @@ const stories = [
 const CommunityStories = () => {
     return (
         <section className="py-10 min-w-sm">
-            <h2 className="text-3xl text-center md:text-4xl font-extrabold text-txt mb-4">
+            <h2 className="text-3xl  text-center md:text-4xl font-extrabold text-txt mb-4">
                 Community Stories
             </h2>
             <p className="text-text text-center mb-10 text-sm md:text-base">
@@ -171,10 +171,10 @@ const CommunityStories = () => {
             <div className="flex flex-col md:flex-row items-start gap-8">
                 {/* Image on the Left */}
                 <div className="w-full md:w-1/2 flex flex-col py-6 justify-center items-center">
-                    <h1 className='text-4xl text-teal-600 text-center font-bold'>
+                    <h1 className='text-4xl text-primary text-center font-bold'>
                         What Partners Say About <br /> PlateShare
                     </h1>
-                    <p className='text-center text-teal-800 mt-6'>"Real stories from the people, charities, and restaurants who are making a difference through food rescue and community impact"</p>
+                    <p className='text-center text-secondary mt-6'>"Real stories from the people, charities, and restaurants who are making a difference through food rescue and community impact"</p>
                 </div>
 
                 {/* Slider Section */}

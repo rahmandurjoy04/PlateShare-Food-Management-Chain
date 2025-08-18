@@ -130,12 +130,12 @@ const MyProfile = () => {
         {/* Profile Info Form */}
         <form onSubmit={handleSubmit(onSubmitProfile)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col">
-            <label className="font-medium mb-1">Phone</label>
+            <label className="font-medium text-secondary mb-1">Phone</label>
             <input type="tel" {...register('phone', { required: 'Phone is required' })} className="input input-bordered w-full" />
           </div>
 
           <div className="flex flex-col">
-            <label className="font-medium mb-1">Location</label>
+            <label className="font-medium text-secondary mb-1">Location</label>
             <input type="text" {...register('location')} className="input input-bordered w-full" />
           </div>
 

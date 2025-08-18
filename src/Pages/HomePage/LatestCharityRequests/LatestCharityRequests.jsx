@@ -51,7 +51,7 @@ const LatestCharityRequests = () => {
             </div>
 
             <h3 className="text-base font-semibold text-gray-700 mb-2">
-              Donation: <span className="text-blue-600">{request.donationTitle}</span>
+              Donation: <span className="text-primary">{request.donationTitle}</span>
             </h3>
 
             <p className="text-gray-600 text-sm mb-1">

@@ -50,6 +50,7 @@ const DashboardLayout = () => {
                     <Link to={'/'}>
                         <PlateShareLogo></PlateShareLogo>
                     </Link>
+                    
                     <li>
                         <Link to="/" >
                             <FaHome className="inline-block mr-2" />

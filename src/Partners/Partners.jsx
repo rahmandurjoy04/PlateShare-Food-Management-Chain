@@ -8,7 +8,7 @@ const PartnerCard = ({ partner }) => (
             alt={partner.name}
             className="w-24 h-24 rounded-full mb-4 object-cover"
         />
-        <h3 className="text-lg font-bold">{partner.name}</h3>
+        <h3 className="text-lg text-primary font-bold">{partner.name}</h3>
         <p className="text-gray-500 text-sm">
             Partner since: {new Date(partner.created_at).toLocaleDateString()}
         </p>

@@ -41,7 +41,7 @@ const TopRestaurants = () => {
                             alt={restaurant.name}
                             className="w-24 h-24 object-cover rounded-full mb-4"
                         />
-                        <h3 className="text-lg font-bold mb-1 text-center">{restaurant.name}</h3>
+                        <h3 className="text-lg text-primary font-bold mb-1 text-center">{restaurant.name}</h3>
                         <p className="text-gray-600 mb-2 text-center">
                             Donations: <span className="font-semibold">{restaurant.donationCount}</span>
                         </p>
@@ -58,7 +58,7 @@ const TopRestaurants = () => {
 
                         <a
                             href={`mailto:${restaurant.email}`}
-                            className="mt-auto w-full btn bg-primary text-white font-semibold py-2 px-4 rounded hover:bg-primary/70 transition"
+                            className="mt-auto w-full btn bg-primary border-none text-white font-semibold py-2 px-4 rounded hover:bg-primary/70 transition"
                         >
                             Contact
                         </a>

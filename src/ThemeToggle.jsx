@@ -19,7 +19,7 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className="btn w-[40px] h-[40px] rounded-full text-xl"
+      className=" w-[40px] h-[40px] rounded-full text-xl"
       onClick={toggleTheme}
     >
       {theme === "light" ? "🌙" : "☀️"}

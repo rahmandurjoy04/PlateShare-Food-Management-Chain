@@ -96,20 +96,20 @@ const AllDonations = () => {
               />
               <div className="p-5 flex-grow flex flex-col justify-between">
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-bold text-text">{donation.title}</h3>
+                  <h3 className="text-2xl font-bold text-primary">{donation.title}</h3>
                   
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-secondary">
                     <strong className="text-primary text-lg">Location:</strong> {donation.location}
                   </p>
                   {donation.charityName && (
-                    <p className="text-sm text-text">
+                    <p className="text-sm text-secondary">
                       <strong className="text-primary text-lg">Charity Assigned:</strong> {donation.charityName}
                     </p>
                   )}
-                  <p className="text-sm text-text">
+                  <p className="text-sm text-secondary">
                     <strong className="text-primary text-lg">Quantity:</strong> {donation.quantity}
                   </p>
-                  <p className="text-sm text-text">
+                  <p className="text-sm text-secondary">
                     <strong className="text-primary text-lg">Pickup Time:</strong> {donation.pickupTime}
                   </p>
                   <p className="">

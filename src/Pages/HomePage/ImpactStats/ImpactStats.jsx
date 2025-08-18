@@ -70,7 +70,7 @@ const ImpactStats = () => {
                             {stats.mealsDonated.toLocaleString()}+
                         </h3>
                         <p className="text-primary font-semibold my-2">Meals Donated</p>
-                        <p className="text-text text-sm text-center">
+                        <p className="text-secondary text-sm text-center">
                             Providing nutritious meals to communities in need.
                         </p>
                     </div>
@@ -82,7 +82,7 @@ const ImpactStats = () => {
                             {stats.foodSaved.toLocaleString()} kg
                         </h3>
                         <p className="text-primary font-semibold my-2">Food Saved</p>
-                        <p className="text-text text-sm  text-center">
+                        <p className="text-secondary text-sm  text-center">
                             Rescuing surplus food from restaurants for redistribution.
                         </p>
                     </div>
@@ -94,7 +94,7 @@ const ImpactStats = () => {
                             {(stats.co2Prevented / 1000).toFixed(1)} tons
                         </h3>
                         <p className="text-primary font-semibold my-2">CO₂ Prevented</p>
-                        <p className="text-text text-sm text-center">
+                        <p className="text-secondary text-sm text-center">
                             Reducing carbon emissions through sustainable practices.
                         </p>
                     </div>
@@ -106,7 +106,7 @@ const ImpactStats = () => {
                             1,200+
                         </h3>
                         <p className="text-primary font-semibold my-2">Volunteers Engaged</p>
-                        <p className="text-text text-sm text-center">
+                        <p className="text-secondary text-sm text-center">
                             Dedicated individuals helping distribute food and support communities.
                         </p>
                     </div>

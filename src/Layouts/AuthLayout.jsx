@@ -11,7 +11,7 @@ const AuthLayout = () => {
             <div className="flex flex-col-reverse min-h-screen md:flex-row min-w-sm max-w-11/12 py-6 mx-auto bg-base-100">
                 {/* Left: Auth Form */}
                 <div className="w-full md:w-1/2 flex items-center justify-center px-6 md:px-12 lg:px-10 py-12">
-                    <div className="w-full min-w-sm max-w-xl rounded-xl ">
+                    <div className="w-full min-w-sm max-w-xl rounded-xl">
                         <Outlet />
                     </div>
                 </div>

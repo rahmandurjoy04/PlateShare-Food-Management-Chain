@@ -86,7 +86,7 @@ const ReceivedDonations = () => {
             className="card bg-base-100 shadow-lg border border-gray-200 rounded-lg flex flex-col justify-between"
           >
             <div className="card-body">
-              <h3 className="card-title text-2xl font-bold text-blue-900 mb-2">
+              <h3 className="card-title text-2xl font-bold text-primary mb-2">
                 {donation.donationTitle}
               </h3>
               <p>
