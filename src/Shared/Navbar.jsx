@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router";
 import PlateShareLogo from "./PlateShareLogo/PlateShareLogo";
 import useAuth from "../hoooks/useAuth";
 import Swal from "sweetalert2";
+import ThemeToggle from "../ThemeToggle";
 
 const Navbar = () => {
   const { user, logoutUser, authLoading } = useAuth();
@@ -111,6 +112,9 @@ const Navbar = () => {
           <Link to="/">
             <PlateShareLogo />
           </Link>
+          <div className="ml-3">
+          <ThemeToggle></ThemeToggle>
+          </div>
         </div>
 
         {/* Center (Links for lg+) */}

@@ -12,12 +12,20 @@
 
   --color-text: #050315;
   --color-base-100: #e0f7fa;
-  /* --color-primary: #8bc3d0; */
-  /* --color-primary: #006064; */
   --color-primary: #0097a7;
   --color-secondary: #80deea;
-  /* --color-secondary: #4dd0e1; */
   --color-accent: #b2ebf2;
+}
+
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  
+  --color-text: #f5f5f5;
+  --color-base-100: #050315;
+  --color-primary: #80deea;
+  --color-secondary: #0097a7;
+  --color-accent: #4dd0e1;
 }
 
 .active {
