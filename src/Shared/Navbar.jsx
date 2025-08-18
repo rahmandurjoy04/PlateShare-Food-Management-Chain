@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import PlateShareLogo from "./PlateShareLogo/PlateShareLogo";
 import useAuth from "../hoooks/useAuth";
 import Swal from "sweetalert2";
@@ -6,6 +6,10 @@ import ThemeToggle from "../ThemeToggle";
 
 const Navbar = () => {
   const { user, logoutUser, authLoading } = useAuth();
+  const navigate = useNavigate()
+  const handleNavigate=() =>{
+    navigate('/dashboard/profile')
+  }
 
   const signOut = () => {
     Swal.fire({
@@ -139,6 +143,8 @@ const Navbar = () => {
                           alt="User"
                           referrerPolicy="no-referrer"
                           className="w-9 h-9 rounded-full border border-white"
+                          onClick={()=>handleNavigate()}
+                          
                         />
                       )}
                     </div>
